@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)file:///C:/Users/colto/Downloads/beanbridge_pro_7.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeanBridge Pro — Coffee Roastery Management</title>
+<link href="./BeanBridge Pro — Coffee Roastery Management_files/css2" rel="stylesheet">
+<script src="./BeanBridge Pro — Coffee Roastery Management_files/chart.umd.js.download"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1C0F07;--caramel:#C07A2F;--cream:#FDF8F2;--muted:rgba(253,248,242,.45);--card:rgba(255,255,255,.05);--border:rgba(255,255,255,.09);--success:#6DBF67;--warn:#D4800A;--danger:#E05C5C;--info:#5B9BD5}
+html,body{min-height:100%;background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:14px}
+.app{display:flex;flex-direction:column;min-height:100vh}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:rgba(16,8,2,.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
+.logo{font-family:'Playfair Display',serif;font-size:20px}.logo em{font-style:normal;color:var(--caramel)}
+.logo-sub{font-family:'DM Mono',monospace;font-size:10px;color:rgba(253,248,242,.25);margin-left:7px}
+.nav{display:flex;gap:2px}
+.nb{background:none;border:1px solid transparent;padding:6px 13px;border-radius:7px;font-size:12.5px;font-family:'DM Sans',sans-serif;color:rgba(253,248,242,.48);cursor:pointer;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.nb:hover{color:var(--cream);background:rgba(255,255,255,.06)}.nb.active{color:var(--cream);background:rgba(192,122,47,.17);border-color:rgba(192,122,47,.32)}
+.content{padding:26px 28px;flex:1;max-width:1500px;width:100%;margin:0 auto}
+.panel{display:none;animation:fi .22s ease}.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.st{font-family:'Playfair Display',serif;font-size:17px;font-weight:400}.ss{font-size:11.5px;color:var(--muted);margin-top:2px}
+.btn{padding:7px 16px;border-radius:7px;font-size:12.5px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;border:1px solid rgba(192,122,47,.38);background:rgba(192,122,47,.13);color:var(--caramel);white-space:nowrap}
+.btn:hover{background:rgba(192,122,47,.24)}.btn:active{transform:scale(.98)}
+.btn-g{border-color:var(--border);background:rgba(255,255,255,.04);color:rgba(253,248,242,.6)}.btn-g:hover{background:rgba(255,255,255,.08);color:var(--cream)}
+.btn-s{padding:5px 10px;font-size:12px}.btn-d{border-color:rgba(224,92,92,.35);background:rgba(224,92,92,.1);color:var(--danger)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:18px}
+.cl{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:rgba(253,248,242,.32);margin-bottom:10px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:22px}
+.metric{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.ml{font-size:10px;color:rgba(253,248,242,.38);letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px}
+.mv{font-size:26px;font-family:'DM Mono',monospace;line-height:1}.mu{font-size:13px;color:rgba(253,248,242,.32);margin-left:1px}.ms{font-size:11px;margin-top:4px}
+.up{color:var(--success)}.dn{color:var(--danger)}.am{color:var(--warn)}
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;padding:8px 12px;font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;color:rgba(253,248,242,.32);border-bottom:1px solid var(--border);font-weight:400;white-space:nowrap;background:rgba(255,255,255,.02)}
+td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:rgba(253,248,242,.82);vertical-align:middle}
+tr:last-child td{border:none}tr:hover td{background:rgba(255,255,255,.02)}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px}
+.to{background:rgba(192,122,47,.13);color:var(--caramel);border:1px solid rgba(192,122,47,.22)}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.sbb{width:65px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;display:inline-block;vertical-align:middle;margin-right:7px}
+.sbf{height:4px;border-radius:2px}
+select,input[type=text],input[type=number],textarea{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:7px;padding:8px 11px;font-size:12.5px;font-family:'DM Sans',sans-serif;color:var(--cream);width:100%;margin-bottom:9px;outline:none;transition:border .15s}
+select:focus,input:focus,textarea:focus{border-color:rgba(192,122,47,.5)}
+option{background:#2A1509;color:var(--cream)}textarea{resize:vertical;min-height:72px}
+input[type=range]{width:100%;accent-color:var(--caramel);margin-bottom:9px;cursor:pointer}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.pl{font-size:12.5px;color:var(--muted)}.pv{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--caramel)}
+.fl{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:rgba(253,248,242,.32);display:block;margin-bottom:4px;margin-top:10px}.fl:first-child{margin-top:0}
+.rg{display:grid;grid-template-columns:310px 1fr;gap:16px;align-items:start}
+.pill{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11.5px;background:rgba(192,122,47,.11);border:1px solid rgba(192,122,47,.22);color:var(--caramel);margin:2px}
+.pstep{display:flex;gap:9px;margin-bottom:8px;align-items:flex-start}
+.psn{width:20px;height:20px;border-radius:50%;background:rgba(192,122,47,.18);border:1px solid rgba(192,122,47,.38);font-size:10.5px;color:var(--caramel);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pst{font-size:12.5px;color:rgba(253,248,242,.8);line-height:1.5}.psd{font-size:11px;color:rgba(253,248,242,.36);font-family:'DM Mono',monospace}
+.wbox{padding:9px 12px;background:rgba(224,92,92,.07);border-left:2px solid var(--danger);font-size:11.5px;color:rgba(253,248,242,.62);line-height:1.7;border-radius:0 6px 6px 0;margin-top:9px}
+.ibox{padding:9px 12px;background:rgba(91,155,213,.07);border-left:2px solid var(--info);font-size:11.5px;color:rgba(253,248,242,.62);line-height:1.7;border-radius:0 6px 6px 0;margin-top:9px}
+.cw{position:relative;width:100%}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin-bottom:20px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.pt{font-family:'DM Mono',monospace;font-size:9.5px;color:rgba(253,248,242,.32);letter-spacing:.8px}
+.pn{font-size:12.5px;color:rgba(253,248,242,.68);margin:3px 0}.pval{font-size:22px;font-family:'DM Mono',monospace;margin:3px 0}.pch{font-size:11.5px}
+.rec{padding:14px 18px;background:rgba(192,122,47,.08);border:1px solid rgba(192,122,47,.22);border-radius:10px;margin-bottom:20px}
+.rect{font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--caramel);margin-bottom:8px}
+.recb{font-size:13px;color:rgba(253,248,242,.75);line-height:1.7}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.or{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12.5px}
+.or:last-child{border:none}.obb{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:2px}
+.obf{height:4px;border-radius:2px;background:var(--caramel)}
+.wr{display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11.5px;color:rgba(253,248,242,.45)}.wv{color:var(--cream)}
+.wi{padding:9px 12px;background:rgba(192,122,47,.07);border-left:2px solid var(--caramel);font-size:11.5px;color:rgba(253,248,242,.62);line-height:1.7;border-radius:0 6px 6px 0;margin-top:10px}
+.cl-layout{display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start}
+.pw{aspect-ratio:3/4;width:100%;border-radius:12px;overflow:hidden;position:relative;border:1px solid var(--border)}
+.poster{width:100%;height:100%;display:flex;flex-direction:column}
+.ptb{padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.08)}
+.pry{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.plot{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,.28)}
+.paz{flex:1;position:relative;overflow:hidden}
+.psvg{width:100%;height:100%;position:absolute;top:0;left:0}
+.pinfo{padding:14px 18px;border-top:1px solid rgba(255,255,255,.08)}
+.polab{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:4px}
+.pbn{font-family:'Playfair Display',serif;font-size:18px;line-height:1.15;margin-bottom:2px}
+.preg{font-family:'DM Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.38);margin-bottom:8px}
+.pdiv{height:1px;background:rgba(255,255,255,.1);margin:8px 0}
+.pfr{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.pfp{font-family:'DM Mono',monospace;font-size:8.5px;padding:2px 7px;border-radius:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65)}
+.pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
+.pslab{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1px}
+.psval{font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,255,255,.85)}
+.pbot{display:flex;justify-content:space-between;align-items:center}
+.ppro{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.ptag{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;opacity:.8}
+.pabar{height:3px;margin-top:10px}
+.theme-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.tbtn{padding:7px 12px;border-radius:7px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.04);color:rgba(253,248,242,.55);transition:all .15s}
+.tbtn:hover{color:var(--cream)}.tbtn.ta{background:rgba(192,122,47,.15);color:var(--caramel)}
+.cbox{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11.5px;color:rgba(253,248,242,.68);line-height:1.85;font-family:'DM Mono',monospace;white-space:pre-wrap;margin-top:8px;min-height:80px}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:400;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:#231208;border:1px solid var(--border);border-radius:13px;padding:26px;width:500px;max-width:95vw;max-height:88vh;overflow-y:auto}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.mt{font-family:'Playfair Display',serif;font-size:16px}
+.mx{background:none;border:none;color:rgba(253,248,242,.35);font-size:18px;cursor:pointer}.mx:hover{color:var(--cream)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.notif{position:fixed;bottom:22px;right:22px;background:#2A1509;border:1px solid rgba(192,122,47,.38);border-radius:9px;padding:11px 16px;font-size:12.5px;color:var(--cream);z-index:500;transform:translateY(70px);opacity:0;transition:all .28s;max-width:300px}
+.notif.show{transform:none;opacity:1}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+@media(max-width:960px){.rg,.ag,.cl-layout{grid-template-columns:1fr}.content{padding:14px}.topbar{padding:0 14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="logo">Bean<em>Bridge</em><span class="logo-sub">PRO</span></div>
+  <nav class="nav">
+    <button class="nb" onclick="nav(&#39;inventory&#39;,this)">📦 Inventory</button>
+    <button class="nb" onclick="nav(&#39;orders&#39;,this)">📋 Orders</button>
+    <button class="nb" onclick="nav(&#39;roast&#39;,this)">🔥 Roast Planner</button>
+    <button class="nb" onclick="nav(&#39;market&#39;,this)">📈 Market</button>
+    <button class="nb" onclick="nav(&#39;analytics&#39;,this)">📊 Analytics</button>
+    <button class="nb active" onclick="nav(&#39;collateral&#39;,this)">🎨 Collateral</button>
+  </nav>
+</header>
+<main class="content">
+
+<!-- INVENTORY -->
+<section id="panel-inventory" class="panel">
+  <div class="metrics" id="inv-metrics"><div class="metric"><div class="ml">Total Stock</div><div class="mv">1,847<span class="mu">kg</span></div><div class="ms up">▲ 12% vs last month</div></div><div class="metric"><div class="ml">Active Lots</div><div class="mv">7</div><div class="ms" style="color:rgba(253,248,242,.35)">3 continents</div></div><div class="metric"><div class="ml">Avg Moisture</div><div class="mv">11.2<span class="mu">%</span></div><div class="ms up">Ideal range</div></div><div class="metric"><div class="ml">Low Stock</div><div class="mv am">3</div><div class="ms dn">Reorder needed</div></div><div class="metric"><div class="ml">Inventory Value</div><div class="mv">$11.5<span class="mu">k</span></div><div class="ms up">At cost</div></div><div class="metric"><div class="ml">Roasts (Month)</div><div class="mv">23</div><div class="ms" style="color:rgba(253,248,242,.35)">584 kg processed</div></div></div>
+  <div class="sh">
+    <div><div class="st">Green Coffee Inventory</div><div class="ss">Click Edit on any row to update details</div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-g btn-s" onclick="exportCSV()">↓ Export CSV</button>
+      <button class="btn btn-s" onclick="openM(&#39;add-lot&#39;)">+ Add Lot</button>
+    </div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Bean / Lot</th><th>Origin</th><th>Region</th><th>Process</th><th>Stock</th><th>Moisture</th><th>Density</th><th>Screen</th><th>Altitude</th><th>Harvest</th><th>Tasting Notes</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="inv-body"><tr><td><div style="font-weight:500;color:var(--cream)">Ethiopia Yirgacheffe G1</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">ETH-2024-07</div></td><td><span class="tag to">Ethiopia</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Yirgacheffe / Gedeo</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#5B9BD5"></span>Washed</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:52.5%;background:var(--success)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">420</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">10.8%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">780</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">17</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">1,950</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Blueberry, Jasmine, Bergamot</td><td style="color:var(--success);font-size:12px">✓ OK</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(0)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Ethiopia Yirgacheffe G1&#39;)">Poster</button></div></td></tr><tr><td><div style="font-weight:500;color:var(--cream)">Colombia Huila Washed</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">COL-2024-03</div></td><td><span class="tag to">Colombia</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Huila</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#5B9BD5"></span>Washed</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:38.75%;background:var(--success)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">310</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">11.2%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">760</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">16</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">1,780</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Caramel, Red Apple, Brown Sugar</td><td style="color:var(--success);font-size:12px">✓ OK</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(1)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Colombia Huila Washed&#39;)">Poster</button></div></td></tr><tr><td><div style="font-weight:500;color:var(--cream)">Guatemala Antigua Natural</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">GTM-2024-11</div></td><td><span class="tag to">Guatemala</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Antigua</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#C07A2F"></span>Natural</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:22.5%;background:var(--success)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">180</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">12.1%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">720</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">15</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">1,550</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Dark Cherry, Chocolate, Tamarind</td><td style="color:var(--success);font-size:12px">✓ OK</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(2)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Guatemala Antigua Natural&#39;)">Poster</button></div></td></tr><tr><td><div style="font-weight:500;color:var(--cream)">Kenya AA Nyeri</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">KEN-2024-05</div></td><td><span class="tag to">Kenya</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Nyeri</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#5B9BD5"></span>Washed</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:11.875%;background:var(--warn)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">95</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">11%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">790</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">18</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">1,820</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Black Currant, Tomato, Grapefruit</td><td style="color:var(--warn);font-size:12px">⚠ Low</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(3)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Kenya AA Nyeri&#39;)">Poster</button></div></td></tr><tr><td><div style="font-weight:500;color:var(--cream)">Brazil Sul de Minas</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">BRZ-2024-09</div></td><td><span class="tag to">Brazil</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Sul de Minas</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#C07A2F"></span>Natural</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:85%;background:var(--success)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">680</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">11.8%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">690</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">15</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">1,100</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Milk Chocolate, Peanut, Dried Fig</td><td style="color:var(--success);font-size:12px">✓ OK</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(4)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Brazil Sul de Minas&#39;)">Poster</button></div></td></tr><tr><td><div style="font-weight:500;color:var(--cream)">Costa Rica Tarrazu Honey</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">CRI-2024-06</div></td><td><span class="tag to">Costa Rica</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Tarrazu</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#F0A500"></span>Honey</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:9%;background:var(--warn)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">72</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">11.5%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">740</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">16</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">1,700</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Peach, Honey, Nougat</td><td style="color:var(--warn);font-size:12px">⚠ Low</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(5)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Costa Rica Tarrazu Honey&#39;)">Poster</button></div></td></tr><tr><td><div style="font-weight:500;color:var(--cream)">Yemen Mocha Haraaz</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:&#39;DM Mono&#39;,monospace;margin-top:1px">YEM-2024-02</div></td><td><span class="tag to">Yemen</span></td><td style="font-size:12px;color:rgba(253,248,242,.55)">Haraaz</td><td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:#C07A2F"></span>Natural</span></td><td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:11.25%;background:var(--warn)"></span></span><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">90</span></div></td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">10.2%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">810</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">14</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:12px">2,100</td><td style="font-size:12px;color:rgba(253,248,242,.5)">2024</td><td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">Dried Apricot, Cardamom, Dark Molasses</td><td style="color:var(--warn);font-size:12px">⚠ Low</td><td><div style="display:flex;gap:5px"><button class="btn btn-g btn-s" onclick="openEditLot(6)">Edit</button><button class="btn btn-g btn-s" onclick="goColl(&#39;Yemen Mocha Haraaz&#39;)">Poster</button></div></td></tr></tbody>
+  </table></div>
+</section>
+
+<!-- ORDERS -->
+<section id="panel-orders" class="panel">
+  <div class="metrics" id="ord-metrics"><div class="metric"><div class="ml">Active Orders</div><div class="mv am">6</div><div class="ms">Awaiting roast</div></div><div class="metric"><div class="ml">Total Revenue</div><div class="mv">$3.7<span class="mu">k</span></div><div class="ms up">All orders</div></div><div class="metric"><div class="ml">Gross Profit</div><div class="mv up">$2.5<span class="mu">k</span></div><div class="ms">After COGS</div></div><div class="metric"><div class="ml">Avg Margin</div><div class="mv up">68<span class="mu">%</span></div><div class="ms">Blended gross</div></div><div class="metric"><div class="ml">Kg to Roast</div><div class="mv">190<span class="mu">kg</span></div><div class="ms">Active queue</div></div><div class="metric"><div class="ml">Fulfilled</div><div class="mv">2</div><div class="ms" style="color:rgba(253,248,242,.35)">Completed</div></div></div>
+  <div class="sh">
+    <div><div class="st">Order Management</div><div class="ss">Full edit on any order · profit auto-calculated from COGS</div></div>
+    <button class="btn btn-s" onclick="openM(&#39;add-order&#39;)">+ New Order</button>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Order ID</th><th>Customer</th><th>Type</th><th>Bean</th><th>Qty kg</th><th>Roast</th><th>$/kg</th><th>Revenue</th><th>COGS</th><th>Profit</th><th>Margin</th><th>Due</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="ord-body"><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2441</td><td>Blue Bottle Supply Co.</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Wholesale</span></td><td style="font-size:12px">Ethiopia Yirgacheffe G1</td><td style="font-family:&#39;DM Mono&#39;,monospace">40</td><td style="font-size:12px">Light</td><td style="font-family:&#39;DM Mono&#39;,monospace">$22.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$880</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$288</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$592</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">67%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-05-02</td><td style="color:#D4800A;font-size:12px">Pending</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(0)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2440</td><td>Cafe Noma</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Wholesale</span></td><td style="font-size:12px">Colombia Huila Washed</td><td style="font-family:&#39;DM Mono&#39;,monospace">25</td><td style="font-size:12px">Medium</td><td style="font-family:&#39;DM Mono&#39;,monospace">$18.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$450</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$163</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$288</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">64%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-04-30</td><td style="color:#5B9BD5;font-size:12px">In Roast</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(1)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2439</td><td>Jane Doe</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Retail</span></td><td style="font-size:12px">Kenya AA Nyeri</td><td style="font-family:&#39;DM Mono&#39;,monospace">2</td><td style="font-size:12px">Medium-Light</td><td style="font-family:&#39;DM Mono&#39;,monospace">$38.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$76</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$18</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$58</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">76%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-04-28</td><td style="color:#6DBF67;font-size:12px">Fulfilled</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(2)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2438</td><td>Sunrise Cafe</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Wholesale</span></td><td style="font-size:12px">Guatemala Antigua Natural</td><td style="font-family:&#39;DM Mono&#39;,monospace">20</td><td style="font-size:12px">Medium-Dark</td><td style="font-family:&#39;DM Mono&#39;,monospace">$17.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$340</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$116</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$224</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">66%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-05-05</td><td style="color:#D4800A;font-size:12px">Pending</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(3)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2437</td><td>Harbor Hotel Group</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Wholesale</span></td><td style="font-size:12px">Brazil Sul de Minas</td><td style="font-family:&#39;DM Mono&#39;,monospace">60</td><td style="font-size:12px">Medium</td><td style="font-family:&#39;DM Mono&#39;,monospace">$14.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$840</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$252</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$588</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">70%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-05-10</td><td style="color:#D4800A;font-size:12px">Pending</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(4)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2436</td><td>Ritual Coffee</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Wholesale</span></td><td style="font-size:12px">Costa Rica Tarrazu Honey</td><td style="font-family:&#39;DM Mono&#39;,monospace">15</td><td style="font-size:12px">Light</td><td style="font-family:&#39;DM Mono&#39;,monospace">$24.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$360</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$117</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$243</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">68%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-04-29</td><td style="color:#C07A2F;font-size:12px">Roasting</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(5)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2435</td><td>Alyssa M.</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Retail</span></td><td style="font-size:12px">Yemen Mocha Haraaz</td><td style="font-family:&#39;DM Mono&#39;,monospace">1</td><td style="font-size:12px">Medium-Light</td><td style="font-family:&#39;DM Mono&#39;,monospace">$55.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$55</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$12</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$43</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">77%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-04-27</td><td style="color:#6DBF67;font-size:12px">Fulfilled</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(6)">Edit</button></td></tr><tr><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">ORD-2434</td><td>Compass Coffee</td><td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">Wholesale</span></td><td style="font-size:12px">Ethiopia Yirgacheffe G1</td><td style="font-family:&#39;DM Mono&#39;,monospace">30</td><td style="font-size:12px">Light</td><td style="font-family:&#39;DM Mono&#39;,monospace">$22.00</td><td style="font-family:&#39;DM Mono&#39;,monospace">$660</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:rgba(253,248,242,.5)">$216</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">$444</td><td style="font-family:&#39;DM Mono&#39;,monospace;color:var(--success)">67%</td><td style="font-family:&#39;DM Mono&#39;,monospace;font-size:11.5px">2026-05-08</td><td style="color:#D4800A;font-size:12px">Pending</td><td><button class="btn btn-g btn-s" onclick="openEditOrd(7)">Edit</button></td></tr></tbody>
+  </table></div>
+</section>
+
+<!-- ROAST PLANNER -->
+<section id="panel-roast" class="panel">
+  <div class="sh"><div><div class="st">Roast Strategy Engine</div><div class="ss">Select a lot, tune parameters, generate a science-backed roast profile</div></div></div>
+  <div class="rg">
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="cl">Bean Selection</div>
+        <label class="fl">Coffee Lot</label>
+        <select id="rb" onchange="prevBean()"><option value="">— select —</option><option value="Ethiopia Yirgacheffe G1">Ethiopia Yirgacheffe G1</option><option value="Colombia Huila Washed">Colombia Huila Washed</option><option value="Guatemala Antigua Natural">Guatemala Antigua Natural</option><option value="Kenya AA Nyeri">Kenya AA Nyeri</option><option value="Brazil Sul de Minas">Brazil Sul de Minas</option><option value="Costa Rica Tarrazu Honey">Costa Rica Tarrazu Honey</option><option value="Yemen Mocha Haraaz">Yemen Mocha Haraaz</option></select>
+        <div id="bean-prev" style="display: block; padding: 9px; background: rgba(255, 255, 255, 0.04); border-radius: 7px; font-size: 11.5px; color: rgba(253, 248, 242, 0.5); font-family: &quot;DM Mono&quot;, monospace; line-height: 1.8; margin-bottom: 9px;">Ethiopia · Yirgacheffe / Gedeo
+Washed · Screen 17 · 1,950m
+Moisture 10.8% · Density 780 g/L
+Notes: Blueberry, Jasmine, Bergamot, Dark Honey</div>
+        <label class="fl">Target Roast</label>
+        <select id="rt"><option>Light (City)</option><option selected="">Medium-light (City+)</option><option>Medium (Full City)</option><option>Medium-dark (Full City+)</option><option>Dark (Vienna / French)</option></select>
+        <label class="fl">Brew Method</label>
+        <select id="ru"><option>Espresso</option><option selected="">Pour-over / filter</option><option>Cold brew</option><option>Aeropress</option><option>Omni-roast</option></select>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="cl">Roaster Parameters</div>
+        <div class="pr"><span class="pl">Batch kg</span><span class="pv" id="bov">5.0</span></div>
+        <input type="range" min="1" max="20" value="5" step="0.5" oninput="document.getElementById(&#39;bov&#39;).textContent=parseFloat(this.value).toFixed(1)">
+        <div class="pr"><span class="pl">Charge temp °C</span><span class="pv" id="cov">200</span></div>
+        <input type="range" min="160" max="240" value="200" step="5" oninput="document.getElementById(&#39;cov&#39;).textContent=this.value">
+        <div class="pr"><span class="pl">Drum speed %</span><span class="pv" id="dov">65</span></div>
+        <input type="range" min="40" max="100" value="65" oninput="document.getElementById(&#39;dov&#39;).textContent=this.value">
+      </div>
+      <div class="card">
+        <div class="cl">Environment</div>
+        <div class="pr"><span class="pl">Ambient temp °C</span><span class="pv" id="aov">22</span></div>
+        <input type="range" min="10" max="40" value="22" oninput="document.getElementById(&#39;aov&#39;).textContent=this.value">
+        <div class="pr"><span class="pl">Humidity %</span><span class="pv" id="hov">55</span></div>
+        <input type="range" min="20" max="90" value="55" oninput="document.getElementById(&#39;hov&#39;).textContent=this.value">
+        <div class="pr"><span class="pl">Elevation m</span><span class="pv" id="eov">50</span></div>
+        <input type="range" min="0" max="3000" value="50" step="50" oninput="document.getElementById(&#39;eov&#39;).textContent=this.value">
+        <button class="btn" style="width:100%;margin-top:12px;padding:11px" onclick="genRoast()">Generate Roast Profile →</button>
+      </div>
+    </div>
+    <div class="card" id="roast-out" style="min-height:520px"><div class="cl">Strategy Output</div><div style="font-size:12.5px;color:rgba(253,248,242,.72);line-height:1.75;margin-bottom:14px;padding:11px;background:rgba(255,255,255,.03);border-radius:8px">This dense, high-altitude washed-processed bean from Ethiopia (moisture 10.8%, 780 g/L) benefits from a controlled development approach. Ambient conditions are favorable. Target ROR 10°C/min through Maillard for optimal flavor clarity.</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px"><div style="text-align:center;padding:9px 4px;background:rgba(255,255,255,.04);border-radius:7px;border:1px solid var(--border)"><div style="font-size:9px;color:rgba(253,248,242,.28);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">First Crack</div><div style="font-family:&#39;DM Mono&#39;,monospace;color:var(--caramel);font-size:13px">193°C</div></div><div style="text-align:center;padding:9px 4px;background:rgba(255,255,255,.04);border-radius:7px;border:1px solid var(--border)"><div style="font-size:9px;color:rgba(253,248,242,.28);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Drop Temp</div><div style="font-family:&#39;DM Mono&#39;,monospace;color:var(--caramel);font-size:13px">204°C</div></div><div style="text-align:center;padding:9px 4px;background:rgba(255,255,255,.04);border-radius:7px;border:1px solid var(--border)"><div style="font-size:9px;color:rgba(253,248,242,.28);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Total Time</div><div style="font-family:&#39;DM Mono&#39;,monospace;color:var(--caramel);font-size:13px">11 min</div></div><div style="text-align:center;padding:9px 4px;background:rgba(255,255,255,.04);border-radius:7px;border:1px solid var(--border)"><div style="font-size:9px;color:rgba(253,248,242,.28);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Dev Ratio</div><div style="font-family:&#39;DM Mono&#39;,monospace;color:var(--caramel);font-size:13px">21%</div></div></div><div style="font-size:9.5px;letter-spacing:.7px;text-transform:uppercase;color:rgba(253,248,242,.28);margin-bottom:9px">Phases</div><div class="pstep"><div class="psn">1</div><div><div class="pst"><strong style="color:#5B9BD5">Drying</strong> — 185→152°C · 4–6 min · low–medium</div><div class="psd">Evaporate surface moisture evenly. Watch for steaming to subside.</div></div></div><div class="pstep"><div class="psn">2</div><div><div class="pst"><strong style="color:#C07A2F">Maillard</strong> — 152→181°C · 3–5 min · medium–high</div><div class="psd">Browning reactions develop sweetness and complexity. Hold ROR at 10°C/min.</div></div></div><div class="pstep"><div class="psn">3</div><div><div class="pst"><strong style="color:#E05C5C">Development</strong> — 181→204°C · 2–3 min · high</div><div class="psd">Post-first-crack. Drop at 204°C for target roast level.</div></div></div><div style="margin-top:12px"><div style="font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;color:rgba(253,248,242,.28);margin-bottom:6px">Expected Flavors</div><div><span class="pill">Blueberry</span><span class="pill">Jasmine</span><span class="pill">Bergamot</span><span class="pill">Dark Honey</span></div></div><div class="wbox">⚠ Bean parameters within normal range — standard profile should perform well<br></div><div class="ibox">☕ Brew at 94°C, 1:15 ratio, 3–4 min total with bloom.</div><div class="cw" style="height:165px;margin-top:14px"><canvas id="rcurve" role="img" aria-label="Roast curve" width="1080" height="165" style="display: block; box-sizing: border-box; height: 165px; width: 1080px;">Curve.</canvas></div></div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="panel-market" class="panel">
+  <div class="sh">
+    <div><div class="st">Green Coffee Market</div><div class="ss">Simulated ICE futures · specialty differentials · inventory recommendation</div></div>
+    <button class="btn btn-g btn-s" onclick="tickMkt()">↻ Refresh</button>
+  </div>
+  <div class="rec"><div class="rect">★ Market Recommendation</div><div class="recb" id="rec-body"><strong style="color:var(--warn)">⚠ Reorder Alert:</strong> Kenya AA Nyeri, Costa Rica Tarrazu Honey, Yemen Mocha Haraaz critically low. Prices rising on Arabica C (ICE) &amp; Colombia Premium — consider locking in current stock. Ethiopia Specialty softening — potential buying opportunity. <strong style="color:var(--success)">Best margin:</strong> Brazil lots offer highest gross margin — prioritize for wholesale.</div></div>
+  <div class="mgrid" id="mkt-cards"><div class="pc"><div class="pt">KC1</div><div class="pn">Arabica C (ICE)</div><div class="pval">$2.187</div><div class="pch" style="color:var(--success)">▲ 0.0074 $/lb</div></div><div class="pc"><div class="pt">COL</div><div class="pn">Colombia Premium</div><div class="pval">$2.540</div><div class="pch" style="color:var(--success)">▲ 0.0057 $/lb</div></div><div class="pc"><div class="pt">ETH</div><div class="pn">Ethiopia Specialty</div><div class="pval">$3.200</div><div class="pch" style="color:var(--danger)">▼ 0.0066 $/lb</div></div><div class="pc"><div class="pt">KEN</div><div class="pn">Kenya AA</div><div class="pval">$3.850</div><div class="pch" style="color:var(--success)">▲ 0.0033 $/lb</div></div><div class="pc"><div class="pt">BRZ</div><div class="pn">Brazil Santos</div><div class="pval">$1.980</div><div class="pch" style="color:var(--danger)">▼ 0.0038 $/lb</div></div><div class="pc"><div class="pt">CRI</div><div class="pn">Costa Rica SHB</div><div class="pval">$2.950</div><div class="pch" style="color:var(--danger)">▼ 0.0068 $/lb</div></div></div>
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:22px">
+    <div class="card"><div class="cl">ICE Arabica C — 90-Day Trend (simulated)</div><div class="cw" style="height:200px"><canvas id="mktChart" role="img" aria-label="90-day arabica price trend" width="915" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 915px;">Price trend.</canvas></div></div>
+    <div class="card"><div class="cl">Seasonality Index</div><div class="cw" style="height:200px"><canvas id="seasChart" role="img" aria-label="Seasonal index" width="438" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 438px;">Seasonal.</canvas></div></div>
+  </div>
+  <div class="sh" style="margin-bottom:10px"><div class="st" style="font-size:15px">Inventory Cost Impact</div></div>
+  <div class="tw"><table><thead><tr><th>Origin</th><th>Stock kg</th><th>Market $/lb</th><th>Total Value</th><th>Cost/kg</th><th>Cost/Shot est.</th><th>Margin Signal</th></tr></thead><tbody id="cost-body"><tr><td>Ethiopia</td><td style="font-family:&#39;DM Mono&#39;,monospace">420</td><td style="font-family:&#39;DM Mono&#39;,monospace">$3.200</td><td style="font-family:&#39;DM Mono&#39;,monospace">$2,963</td><td style="font-family:&#39;DM Mono&#39;,monospace">$7.05</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.071</td><td style="color:var(--info)">Premium</td></tr><tr><td>Colombia</td><td style="font-family:&#39;DM Mono&#39;,monospace">310</td><td style="font-family:&#39;DM Mono&#39;,monospace">$2.540</td><td style="font-family:&#39;DM Mono&#39;,monospace">$1,736</td><td style="font-family:&#39;DM Mono&#39;,monospace">$5.60</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.056</td><td style="color:var(--warn)">Moderate</td></tr><tr><td>Guatemala</td><td style="font-family:&#39;DM Mono&#39;,monospace">180</td><td style="font-family:&#39;DM Mono&#39;,monospace">$2.300</td><td style="font-family:&#39;DM Mono&#39;,monospace">$913</td><td style="font-family:&#39;DM Mono&#39;,monospace">$5.07</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.051</td><td style="color:var(--warn)">Moderate</td></tr><tr><td>Kenya</td><td style="font-family:&#39;DM Mono&#39;,monospace">95</td><td style="font-family:&#39;DM Mono&#39;,monospace">$3.850</td><td style="font-family:&#39;DM Mono&#39;,monospace">$806</td><td style="font-family:&#39;DM Mono&#39;,monospace">$8.49</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.085</td><td style="color:var(--info)">Premium</td></tr><tr><td>Brazil</td><td style="font-family:&#39;DM Mono&#39;,monospace">680</td><td style="font-family:&#39;DM Mono&#39;,monospace">$1.980</td><td style="font-family:&#39;DM Mono&#39;,monospace">$2,968</td><td style="font-family:&#39;DM Mono&#39;,monospace">$4.37</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.044</td><td style="color:var(--success)">Strong</td></tr><tr><td>Costa Rica</td><td style="font-family:&#39;DM Mono&#39;,monospace">72</td><td style="font-family:&#39;DM Mono&#39;,monospace">$2.950</td><td style="font-family:&#39;DM Mono&#39;,monospace">$468</td><td style="font-family:&#39;DM Mono&#39;,monospace">$6.50</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.065</td><td style="color:var(--warn)">Moderate</td></tr><tr><td>Yemen</td><td style="font-family:&#39;DM Mono&#39;,monospace">90</td><td style="font-family:&#39;DM Mono&#39;,monospace">$3.600</td><td style="font-family:&#39;DM Mono&#39;,monospace">$714</td><td style="font-family:&#39;DM Mono&#39;,monospace">$7.94</td><td style="font-family:&#39;DM Mono&#39;,monospace">$0.079</td><td style="color:var(--info)">Premium</td></tr></tbody></table></div>
+</section>
+
+<!-- ANALYTICS -->
+<section id="panel-analytics" class="panel">
+  <div class="sh"><div><div class="st">Roastery Analytics</div><div class="ss">Live ambient conditions · inventory distribution · revenue performance</div></div></div>
+  <div class="metrics" id="anal-metrics"><div class="metric"><div class="ml">Total Inventory</div><div class="mv">1,847<span class="mu">kg</span></div><div class="ms up">▲ 12% MoM</div></div><div class="metric"><div class="ml">Lots Tracked</div><div class="mv">7</div><div class="ms" style="color:rgba(253,248,242,.35)">3 continents</div></div><div class="metric"><div class="ml">Order Revenue</div><div class="mv">$3.7<span class="mu">k</span></div><div class="ms up">All-time</div></div><div class="metric"><div class="ml">Gross Margin</div><div class="mv up">68<span class="mu">%</span></div><div class="ms">Blended</div></div></div>
+  <div class="ag">
+    <div>
+      <div class="card" style="margin-bottom:12px"><div class="cl">Stock by Origin</div><div id="orig-list"><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Ethiopia</span><div class="obb"><div class="obf" style="width:23%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">420 kg</span></div><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Colombia</span><div class="obb"><div class="obf" style="width:17%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">310 kg</span></div><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Guatemala</span><div class="obb"><div class="obf" style="width:10%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">180 kg</span></div><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Kenya</span><div class="obb"><div class="obf" style="width:5%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">95 kg</span></div><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Brazil</span><div class="obb"><div class="obf" style="width:37%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">680 kg</span></div><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Costa Rica</span><div class="obb"><div class="obf" style="width:4%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">72 kg</span></div><div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">Yemen</span><div class="obb"><div class="obf" style="width:5%"></div></div><span style="font-family:&#39;DM Mono&#39;,monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">90 kg</span></div></div></div>
+      <div class="card" style="margin-bottom:12px"><div class="cl">Moisture % by Lot</div><div class="cw" style="height:165px"><canvas id="moistChart" role="img" aria-label="Moisture by lot" width="677" height="165" style="display: block; box-sizing: border-box; height: 165px; width: 677px;">Moisture.</canvas></div></div>
+      <div class="card" style="margin-bottom:12px"><div class="cl">Monthly Throughput kg Roasted</div><div class="cw" style="height:155px"><canvas id="thruChart" role="img" aria-label="Throughput" width="677" height="155" style="display: block; box-sizing: border-box; height: 155px; width: 677px;">Throughput.</canvas></div></div>
+      <div class="card"><div class="cl">Revenue vs COGS by Bean</div><div class="cw" style="height:165px"><canvas id="revChart" role="img" aria-label="Revenue vs COGS" width="677" height="165" style="display: block; box-sizing: border-box; height: 165px; width: 677px;">Revenue.</canvas></div></div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="cl">Roastery Conditions <span style="font-size:8.5px;color:rgba(253,248,242,.2);font-family:&#39;DM Mono&#39;,monospace;margin-left:5px">LIVE · Open-Meteo API</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div><div style="font-size:36px;font-family:&#39;DM Mono&#39;,monospace;line-height:1" id="wt">53°F</div><div style="font-size:11.5px;color:rgba(253,248,242,.38);margin-top:3px" id="wc">Fall River, MA — Roastery</div></div>
+          <div style="text-align:right"><div style="font-size:12.5px;color:rgba(253,248,242,.55)" id="wd">—</div><div style="font-size:11px;color:rgba(253,248,242,.32);margin-top:3px" id="wh">Humidity: 45%</div></div>
+        </div>
+        <div class="wr"><div>Wind <span class="wv" id="ww">8 mph</span></div><div>Pressure <span class="wv" id="wp">1020 hPa</span></div><div>Dew pt <span class="wv" id="wdp">0°C</span></div><div>Barometric <span class="wv" id="wb">High</span></div></div>
+        <div class="wi" id="wi">✓ Humidity (45%) within optimal range. Standard profiles should perform nominally.</div>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="cl">Roast Level Distribution</div>
+        <div style="display:flex;gap:14px;align-items:center">
+          <div class="cw" style="height:145px;width:145px;flex-shrink:0"><canvas id="distChart" role="img" aria-label="Roast distribution" width="145" height="145" style="display: block; box-sizing: border-box; height: 145px; width: 145px;">Dist.</canvas></div>
+          <div id="dist-leg" style="font-size:12px;color:rgba(253,248,242,.5)"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="width:9px;height:9px;border-radius:2px;background:#C07A2F;flex-shrink:0"></span><span>Light <span style="color:rgba(253,248,242,.32);font-size:11px">22%</span></span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="width:9px;height:9px;border-radius:2px;background:#A0622A;flex-shrink:0"></span><span>Med-Light <span style="color:rgba(253,248,242,.32);font-size:11px">35%</span></span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="width:9px;height:9px;border-radius:2px;background:#7A4420;flex-shrink:0"></span><span>Medium <span style="color:rgba(253,248,242,.32);font-size:11px">30%</span></span></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="width:9px;height:9px;border-radius:2px;background:#5A2E10;flex-shrink:0"></span><span>Med-Dark <span style="color:rgba(253,248,242,.32);font-size:11px">13%</span></span></div></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:12px"><div class="cl">Process Method by Stock</div><div class="cw" style="height:145px"><canvas id="procChart" role="img" aria-label="Process breakdown" width="677" height="145" style="display: block; box-sizing: border-box; height: 145px; width: 677px;">Process.</canvas></div></div>
+      <div class="card"><div class="cl">Order Status Breakdown</div><div class="cw" style="height:145px"><canvas id="ordChart" role="img" aria-label="Order status" width="677" height="145" style="display: block; box-sizing: border-box; height: 145px; width: 677px;">Orders.</canvas></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLATERAL -->
+<section id="panel-collateral" class="panel active">
+  <div class="sh"><div><div class="st">Marketing Collateral Generator</div><div class="ss">Select a lot · choose a vibe · generate bag copy and poster art from your inventory</div></div></div>
+  <div class="cl-layout">
+    <div>
+      <div style="font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:rgba(253,248,242,.3);margin-bottom:8px">Poster Preview · 3:4</div>
+      <div class="pw">
+        <div class="poster" id="live-poster" style="background:linear-gradient(155deg,#2a1800,#120900)">
+          <div class="ptb"><div class="pry" id="p-brand">SUMMIT ROASTERS</div><div class="plot" id="p-lot">LOT ETH-2024-07</div></div>
+          <div class="paz"><svg id="part" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0"><defs><lineargradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#12082a"></stop><stop offset="30%" stop-color="#8b2a18"></stop><stop offset="58%" stop-color="#e8622a"></stop><stop offset="80%" stop-color="#f4a040"></stop><stop offset="100%" stop-color="#fcd878"></stop></lineargradient><radialgradient id="es" cx="34%" cy="60%" r="20%"><stop offset="0%" stop-color="#fff5a0"></stop><stop offset="30%" stop-color="#ffc030" stop-opacity="0.9"></stop><stop offset="100%" stop-color="#ff6000" stop-opacity="0"></stop></radialgradient></defs><rect width="380" height="300" fill="url(#eg)"></rect><ellipse cx="130" cy="180" rx="80" ry="80" fill="url(#es)"></ellipse><circle cx="130" cy="180" r="32" fill="#ffe060" opacity="0.95"></circle><circle cx="130" cy="180" r="26" fill="#fff4a0" opacity="0.9"></circle><path d="M0,195 Q40,168 85,180 Q120,158 160,172 Q200,148 240,162 Q275,145 315,156 Q348,148 380,153 L380,220 L0,220Z" fill="#3d1a5a" opacity="0.85"></path><path d="M0,212 Q50,192 100,202 Q150,182 198,194 Q245,175 288,188 Q332,178 380,184 L380,240 L0,240Z" fill="#5a2a1a" opacity="0.9"></path><path d="M0,234 Q90,222 190,228 Q280,218 380,223 L380,300 L0,300Z" fill="#8b4a14"></path><rect x="0" y="250" width="380" height="50" fill="#6a3410"></rect><rect x="49" y="204" width="5" height="38" fill="#0d0703" rx="2"></rect><ellipse cx="52" cy="200" rx="26" ry="9" fill="#0a0602"></ellipse><ellipse cx="34" cy="205" rx="14" ry="6" fill="#0e0a06"></ellipse><ellipse cx="70" cy="204" rx="16" ry="6" fill="#0e0a06"></ellipse><rect x="168" y="210" width="4" height="32" fill="#0d0703" rx="2"></rect><ellipse cx="170" cy="206" rx="30" ry="10" fill="#0a0602"></ellipse><ellipse cx="148" cy="211" rx="16" ry="6" fill="#0e0a06"></ellipse><ellipse cx="192" cy="209" rx="18" ry="6" fill="#0e0a06"></ellipse><rect x="308" y="212" width="4" height="30" fill="#0d0703" rx="2"></rect><ellipse cx="310" cy="208" rx="24" ry="8" fill="#0a0602"></ellipse><path d="M320,300 Q315,272 322,254 Q330,237 318,224" fill="none" stroke="#3a1e08" stroke-width="3"></path><path d="M322,254 Q338,247 345,249" fill="none" stroke="#3a1e08" stroke-width="2"></path><circle cx="347" cy="248" r="6" fill="#d42c18"></circle><circle cx="355" cy="245" r="5.5" fill="#b82214"></circle><circle cx="341" cy="253" r="5" fill="#e03520"></circle><path d="M318,239 Q302,233 296,236" fill="none" stroke="#3a1e08" stroke-width="2"></path><circle cx="293" cy="235" r="5.5" fill="#c82816"></circle><circle cx="286" cy="239" r="5" fill="#d42e18"></circle><circle cx="50" cy="28" r="1.5" fill="white" opacity="0.8"></circle><circle cx="110" cy="16" r="1.2" fill="white" opacity="0.7"></circle><circle cx="195" cy="22" r="1.8" fill="white" opacity="0.85"></circle><circle cx="270" cy="12" r="1" fill="white" opacity="0.65"></circle><circle cx="345" cy="30" r="1.4" fill="white" opacity="0.75"></circle><circle cx="320" cy="20" r="1.2" fill="white" opacity="0.6"></circle></svg></div>
+          <div class="pinfo">
+            <div class="polab" id="p-olab" style="color: rgba(192, 122, 47, 0.565);">ETHIOPIA · YIRGACHEFFE / GEDEO</div>
+            <div class="pbn" id="p-name">Ethiopia Yirgacheffe G1</div>
+            <div class="preg" id="p-reg">Yirgacheffe / Gedeo</div>
+            <div class="pdiv"></div>
+            <div class="pfr" id="p-flavors"><span class="pfp">Blueberry</span><span class="pfp">Jasmine</span><span class="pfp">Bergamot</span><span class="pfp">Dark Honey</span></div>
+            <div class="pstats">
+              <div><div class="pslab">Altitude</div><div class="psval" id="p-alt">1,950m</div></div>
+              <div><div class="pslab">Process</div><div class="psval" id="p-proc">Washed</div></div>
+              <div><div class="pslab">Roast</div><div class="psval" id="p-rlv">Medium</div></div>
+            </div>
+            <div class="pbot"><div class="ppro" id="p-harvest">HARVEST 2024</div><div class="ptag" id="p-tagline" style="color: rgba(192, 122, 47, 0.753);">Balanced &amp; Rich</div></div>
+            <div class="pabar" id="p-abar" style="background: rgb(192, 122, 47);"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <div class="sh" style="margin-bottom:6px"><div style="font-size:10px;letter-spacing:.7px;text-transform:uppercase;color:rgba(253,248,242,.3)">Generated Copy</div><button class="btn btn-g btn-s" onclick="copyText()">Copy</button></div>
+        <div id="copy-box" class="cbox">TAGLINE
+"Where Coffee Was Born"
+
+BAG DESCRIPTION
+Sourced from the Yirgacheffe / Gedeo region of Ethiopia at 1,950 meters above sea level, this washed-processed lot delivers a clean, transparent cup that captures the essence of its terroir. Harvested in 2024, the beans arrive with notable density and clarity. Expect Blueberry and Jasmine on the nose, with Bergamot lingering long after the last sip.
+
+TASTING NOTES
+Blueberry · Jasmine · Bergamot · Dark Honey
+
+BREW TIP
+Pour-over at 94°C highlights its clarity perfectly.
+
+COUNTER CARD
+"Blueberry, Jasmine — from 1950m in Ethiopia."
+
+SOCIAL CAPTION
+Single origin from Ethiopia. Blueberry · Jasmine · Bergamot. Now roasting. #specialtycoffee #ethiopia #singleorigin</div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="cl">Coffee Lot</div>
+        <label class="fl">Select Lot</label>
+        <select id="coll-lot" onchange="onCollLot()"><option value="">— select —</option><option value="Ethiopia Yirgacheffe G1">Ethiopia Yirgacheffe G1</option><option value="Colombia Huila Washed">Colombia Huila Washed</option><option value="Guatemala Antigua Natural">Guatemala Antigua Natural</option><option value="Kenya AA Nyeri">Kenya AA Nyeri</option><option value="Brazil Sul de Minas">Brazil Sul de Minas</option><option value="Costa Rica Tarrazu Honey">Costa Rica Tarrazu Honey</option><option value="Yemen Mocha Haraaz">Yemen Mocha Haraaz</option></select>
+        <div id="coll-prev" style="display: block; padding: 9px; background: rgba(255, 255, 255, 0.04); border-radius: 7px; font-size: 11.5px; color: rgba(253, 248, 242, 0.5); font-family: &quot;DM Mono&quot;, monospace; line-height: 1.9; margin-top: -2px; margin-bottom: 9px;">Ethiopia · Yirgacheffe / Gedeo
+Washed · 1,950m · Screen 17
+Moisture 10.8% · Density 780 g/L
+Notes: Blueberry, Jasmine, Bergamot, Dark Honey
+Intensely floral with wine-like acidity and a sweet lingering finish.</div>
+        <label class="fl">Roast Level for Poster</label>
+        <select id="coll-roast" onchange="refreshPoster()"><option>Light</option><option>Medium-Light</option><option selected="">Medium</option><option>Medium-Dark</option><option>Dark</option></select>
+        <label class="fl">Brand / Roastery Name</label>
+        <input type="text" id="coll-brand" value="Summit Roasters" oninput="refreshPoster()">
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="cl">Poster Vibe</div>
+        <div class="theme-row" id="theme-row"><button class="tbtn ta" onclick="setTheme(&#39;desert&#39;,this)" style="border-color:#C07A2F">Desert Amber</button><button class="tbtn" onclick="setTheme(&#39;highland&#39;,this)" style="border-color:rgba(255,255,255,.09)">Highland Green</button><button class="tbtn" onclick="setTheme(&#39;ocean&#39;,this)" style="border-color:rgba(255,255,255,.09)">Ocean Blue</button><button class="tbtn" onclick="setTheme(&#39;noir&#39;,this)" style="border-color:rgba(255,255,255,.09)">Noir Cream</button><button class="tbtn" onclick="setTheme(&#39;blossom&#39;,this)" style="border-color:rgba(255,255,255,.09)">Blossom Pink</button><button class="tbtn" onclick="setTheme(&#39;terra&#39;,this)" style="border-color:rgba(255,255,255,.09)">Terra Cotta</button></div>
+      </div>
+      <button class="btn" style="width:100%;padding:11px;margin-bottom:9px;font-size:13px" onclick="genColl()">✦ Generate Collateral →</button>
+      <button class="btn btn-g" style="width:100%;padding:10px" onclick="dlPoster()">↓ Save Poster (screenshot)</button>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- ADD LOT MODAL -->
+<div class="modal-bg" id="modal-add-lot"><div class="modal">
+  <div class="mh"><div class="mt">Add New Lot</div><button class="mx" onclick="closeM(&#39;add-lot&#39;)">✕</button></div>
+  <div class="frow"><div><label class="fl">Bean Name</label><input id="nl-name" type="text" placeholder="e.g. Peru Cajamarca"></div><div><label class="fl">Lot ID</label><input id="nl-lot" type="text" placeholder="PER-2024-01"></div></div>
+  <div class="frow"><div><label class="fl">Origin</label><input id="nl-origin" type="text" placeholder="Peru"></div><div><label class="fl">Region</label><input id="nl-region" type="text" placeholder="Cajamarca"></div></div>
+  <div class="frow"><div><label class="fl">Process</label><select id="nl-proc"><option>Washed</option><option>Natural</option><option>Honey</option><option>Anaerobic</option></select></div><div><label class="fl">Harvest</label><input id="nl-harv" type="text" value="2024"></div></div>
+  <div class="frow"><div><label class="fl">Stock kg</label><input id="nl-stock" type="number" value="100"></div><div><label class="fl">Moisture %</label><input id="nl-moist" type="number" value="11.0" step="0.1"></div></div>
+  <div class="frow"><div><label class="fl">Density g/L</label><input id="nl-dens" type="number" value="750"></div><div><label class="fl">Screen</label><input id="nl-screen" type="number" value="16"></div></div>
+  <div class="frow"><div><label class="fl">Altitude masl</label><input id="nl-alt" type="number" value="1600"></div><div><label class="fl">Your Cost/kg $</label><input id="nl-cost" type="number" value="6.50" step="0.01"></div></div>
+  <label class="fl">Tasting Notes (comma-separated)</label><input id="nl-notes" type="text" placeholder="caramel, citrus, almond">
+  <label class="fl">Cup Profile</label><textarea id="nl-profile" placeholder="Brief description..."></textarea>
+  <div style="display:flex;gap:9px;margin-top:14px"><button class="btn btn-g" style="flex:1" onclick="closeM(&#39;add-lot&#39;)">Cancel</button><button class="btn" style="flex:1" onclick="saveLot()">Save Lot</button></div>
+</div></div>
+
+<!-- EDIT LOT MODAL -->
+<div class="modal-bg" id="modal-edit-lot"><div class="modal">
+  <div class="mh"><div class="mt">Edit Lot</div><button class="mx" onclick="closeM(&#39;edit-lot&#39;)">✕</button></div>
+  <div class="frow"><div><label class="fl">Bean Name</label><input id="el-name" type="text"></div><div><label class="fl">Lot ID</label><input id="el-lot" type="text"></div></div>
+  <div class="frow"><div><label class="fl">Origin</label><input id="el-origin" type="text"></div><div><label class="fl">Region</label><input id="el-region" type="text"></div></div>
+  <div class="frow"><div><label class="fl">Process</label><select id="el-proc"><option>Washed</option><option>Natural</option><option>Honey</option><option>Anaerobic</option></select></div><div><label class="fl">Harvest</label><input id="el-harv" type="text"></div></div>
+  <div class="frow"><div><label class="fl">Stock kg</label><input id="el-stock" type="number"></div><div><label class="fl">Moisture %</label><input id="el-moist" type="number" step="0.1"></div></div>
+  <div class="frow"><div><label class="fl">Density g/L</label><input id="el-dens" type="number"></div><div><label class="fl">Screen</label><input id="el-screen" type="number"></div></div>
+  <div class="frow"><div><label class="fl">Altitude masl</label><input id="el-alt" type="number"></div><div><label class="fl">Cost/kg $</label><input id="el-cost" type="number" step="0.01"></div></div>
+  <label class="fl">Tasting Notes</label><input id="el-notes" type="text">
+  <label class="fl">Cup Profile</label><textarea id="el-profile"></textarea>
+  <input type="hidden" id="el-idx">
+  <div style="display:flex;gap:9px;margin-top:14px"><button class="btn btn-d btn-g" style="flex:0.6" onclick="delLot()">Delete</button><button class="btn btn-g" style="flex:1" onclick="closeM(&#39;edit-lot&#39;)">Cancel</button><button class="btn" style="flex:1" onclick="updateLot()">Save</button></div>
+</div></div>
+
+<!-- ADD ORDER MODAL -->
+<div class="modal-bg" id="modal-add-order"><div class="modal">
+  <div class="mh"><div class="mt">New Order</div><button class="mx" onclick="closeM(&#39;add-order&#39;)">✕</button></div>
+  <div class="frow"><div><label class="fl">Customer</label><input id="no-cust" type="text" placeholder="Cafe Name"></div><div><label class="fl">Type</label><select id="no-type"><option>Wholesale</option><option>Retail</option><option>Subscription</option></select></div></div>
+  <label class="fl">Bean Lot</label><select id="no-bean"><option>Ethiopia Yirgacheffe G1</option><option>Colombia Huila Washed</option><option>Guatemala Antigua Natural</option><option>Kenya AA Nyeri</option><option>Brazil Sul de Minas</option><option>Costa Rica Tarrazu Honey</option><option>Yemen Mocha Haraaz</option></select>
+  <div class="frow"><div><label class="fl">Qty kg</label><input id="no-qty" type="number" value="10"></div><div><label class="fl">Price/kg $</label><input id="no-price" type="number" value="18.00" step="0.5"></div></div>
+  <div class="frow"><div><label class="fl">Roast</label><select id="no-roast"><option>Light</option><option selected="">Medium-Light</option><option>Medium</option><option>Medium-Dark</option><option>Dark</option></select></div><div><label class="fl">Due Date</label><input id="no-due" type="text" placeholder="YYYY-MM-DD"></div></div>
+  <div style="display:flex;gap:9px;margin-top:14px"><button class="btn btn-g" style="flex:1" onclick="closeM(&#39;add-order&#39;)">Cancel</button><button class="btn" style="flex:1" onclick="saveOrder()">Add Order</button></div>
+</div></div>
+
+<!-- EDIT ORDER MODAL -->
+<div class="modal-bg" id="modal-edit-order"><div class="modal">
+  <div class="mh"><div class="mt">Edit Order</div><button class="mx" onclick="closeM(&#39;edit-order&#39;)">✕</button></div>
+  <div class="frow"><div><label class="fl">Customer</label><input id="eo-cust" type="text"></div><div><label class="fl">Type</label><select id="eo-type"><option>Wholesale</option><option>Retail</option><option>Subscription</option></select></div></div>
+  <label class="fl">Bean Lot</label><select id="eo-bean"><option>Ethiopia Yirgacheffe G1</option><option>Colombia Huila Washed</option><option>Guatemala Antigua Natural</option><option>Kenya AA Nyeri</option><option>Brazil Sul de Minas</option><option>Costa Rica Tarrazu Honey</option><option>Yemen Mocha Haraaz</option></select>
+  <div class="frow"><div><label class="fl">Qty kg</label><input id="eo-qty" type="number"></div><div><label class="fl">Price/kg $</label><input id="eo-price" type="number" step="0.5"></div></div>
+  <div class="frow"><div><label class="fl">Roast</label><select id="eo-roast"><option>Light</option><option>Medium-Light</option><option>Medium</option><option>Medium-Dark</option><option>Dark</option></select></div><div><label class="fl">Due Date</label><input id="eo-due" type="text"></div></div>
+  <label class="fl">Status</label><select id="eo-status"><option>Pending</option><option>Roasting</option><option>In Roast</option><option>Fulfilled</option><option>Cancelled</option></select>
+  <input type="hidden" id="eo-idx">
+  <div style="display:flex;gap:9px;margin-top:14px"><button class="btn btn-d btn-g" style="flex:0.6" onclick="delOrder()">Delete</button><button class="btn btn-g" style="flex:1" onclick="closeM(&#39;edit-order&#39;)">Cancel</button><button class="btn" style="flex:1" onclick="updateOrder()">Save</button></div>
+</div></div>
+
+<div class="notif" id="notif">Collateral generated!</div>
+<script>
+var PC={Washed:'#5B9BD5',Natural:'#C07A2F',Honey:'#F0A500',Anaerobic:'#C46FD5'};
+var OSC={Pending:'#D4800A',Fulfilled:'#6DBF67','In Roast':'#5B9BD5',Roasting:'#C07A2F',Cancelled:'#E05C5C'};
+var PM={Ethiopia:3.20,Colombia:2.54,Guatemala:2.30,Kenya:3.85,Brazil:1.98,'Costa Rica':2.95,Yemen:3.60};
+
+var inv=[
+  {name:'Ethiopia Yirgacheffe G1',lot:'ETH-2024-07',origin:'Ethiopia',region:'Yirgacheffe / Gedeo',process:'Washed',stock:420,moisture:10.8,density:780,screen:17,altitude:1950,harvest:'2024',costPerKg:7.20,notes:'Blueberry, Jasmine, Bergamot, Dark Honey',profile:'Intensely floral with wine-like acidity and a sweet lingering finish.'},
+  {name:'Colombia Huila Washed',lot:'COL-2024-03',origin:'Colombia',region:'Huila',process:'Washed',stock:310,moisture:11.2,density:760,screen:16,altitude:1780,harvest:'2024',costPerKg:6.50,notes:'Caramel, Red Apple, Brown Sugar, Citrus Zest',profile:'Well-balanced with caramel sweetness and bright apple-like acidity.'},
+  {name:'Guatemala Antigua Natural',lot:'GTM-2024-11',origin:'Guatemala',region:'Antigua',process:'Natural',stock:180,moisture:12.1,density:720,screen:15,altitude:1550,harvest:'2024',costPerKg:5.80,notes:'Dark Cherry, Chocolate, Tamarind, Rum',profile:'Rich and heavy-bodied with natural ferment complexity and bittersweet chocolate.'},
+  {name:'Kenya AA Nyeri',lot:'KEN-2024-05',origin:'Kenya',region:'Nyeri',process:'Washed',stock:95,moisture:11.0,density:790,screen:18,altitude:1820,harvest:'2024',costPerKg:9.10,notes:'Black Currant, Tomato, Grapefruit, Cedar',profile:'Classic Kenyan brightness with savory-sweet interplay and blackcurrant intensity.'},
+  {name:'Brazil Sul de Minas',lot:'BRZ-2024-09',origin:'Brazil',region:'Sul de Minas',process:'Natural',stock:680,moisture:11.8,density:690,screen:15,altitude:1100,harvest:'2024',costPerKg:4.20,notes:'Milk Chocolate, Peanut, Dried Fig, Vanilla',profile:'Soft, low-acid with creamy mouthfeel and a sweet chocolate base.'},
+  {name:'Costa Rica Tarrazu Honey',lot:'CRI-2024-06',origin:'Costa Rica',region:'Tarrazu',process:'Honey',stock:72,moisture:11.5,density:740,screen:16,altitude:1700,harvest:'2024',costPerKg:7.80,notes:'Peach, Honey, Nougat, Mandarin',profile:'Stone fruit brightness with honey sweetness and a clean lingering finish.'},
+  {name:'Yemen Mocha Haraaz',lot:'YEM-2024-02',origin:'Yemen',region:'Haraaz',process:'Natural',stock:90,moisture:10.2,density:810,screen:14,altitude:2100,harvest:'2024',costPerKg:12.40,notes:'Dried Apricot, Cardamom, Dark Molasses, Sandalwood',profile:'Ancient and complex. Wild ferment character with spice and extraordinary aromatic depth.'}
+];
+
+var orders=[
+  {id:'ORD-2441',customer:'Blue Bottle Supply Co.',type:'Wholesale',bean:'Ethiopia Yirgacheffe G1',qty:40,pricePerKg:22,roast:'Light',due:'2026-05-02',status:'Pending'},
+  {id:'ORD-2440',customer:'Cafe Noma',type:'Wholesale',bean:'Colombia Huila Washed',qty:25,pricePerKg:18,roast:'Medium',due:'2026-04-30',status:'In Roast'},
+  {id:'ORD-2439',customer:'Jane Doe',type:'Retail',bean:'Kenya AA Nyeri',qty:2,pricePerKg:38,roast:'Medium-Light',due:'2026-04-28',status:'Fulfilled'},
+  {id:'ORD-2438',customer:'Sunrise Cafe',type:'Wholesale',bean:'Guatemala Antigua Natural',qty:20,pricePerKg:17,roast:'Medium-Dark',due:'2026-05-05',status:'Pending'},
+  {id:'ORD-2437',customer:'Harbor Hotel Group',type:'Wholesale',bean:'Brazil Sul de Minas',qty:60,pricePerKg:14,roast:'Medium',due:'2026-05-10',status:'Pending'},
+  {id:'ORD-2436',customer:'Ritual Coffee',type:'Wholesale',bean:'Costa Rica Tarrazu Honey',qty:15,pricePerKg:24,roast:'Light',due:'2026-04-29',status:'Roasting'},
+  {id:'ORD-2435',customer:'Alyssa M.',type:'Retail',bean:'Yemen Mocha Haraaz',qty:1,pricePerKg:55,roast:'Medium-Light',due:'2026-04-27',status:'Fulfilled'},
+  {id:'ORD-2434',customer:'Compass Coffee',type:'Wholesale',bean:'Ethiopia Yirgacheffe G1',qty:30,pricePerKg:22,roast:'Light',due:'2026-05-08',status:'Pending'}
+];
+
+var mktData=[
+  {ticker:'KC1',name:'Arabica C (ICE)',price:2.187,change:0.023},
+  {ticker:'COL',name:'Colombia Premium',price:2.54,change:-0.011},
+  {ticker:'ETH',name:'Ethiopia Specialty',price:3.20,change:0.045},
+  {ticker:'KEN',name:'Kenya AA',price:3.85,change:0.067},
+  {ticker:'BRZ',name:'Brazil Santos',price:1.98,change:0.008},
+  {ticker:'CRI',name:'Costa Rica SHB',price:2.95,change:-0.022}
+];
+
+var THEMES=[
+  {id:'desert',label:'Desert Amber',accent:'#C07A2F',bg:'linear-gradient(155deg,#2a1800,#120900)'},
+  {id:'highland',label:'Highland Green',accent:'#6DBF67',bg:'linear-gradient(155deg,#0d1f0d,#050e05)'},
+  {id:'ocean',label:'Ocean Blue',accent:'#5B9BD5',bg:'linear-gradient(155deg,#041830,#010810)'},
+  {id:'noir',label:'Noir Cream',accent:'#E8DDD0',bg:'linear-gradient(155deg,#111,#080808)'},
+  {id:'blossom',label:'Blossom Pink',accent:'#E05C8A',bg:'linear-gradient(155deg,#2a0715,#100308)'},
+  {id:'terra',label:'Terra Cotta',accent:'#D4704A',bg:'linear-gradient(155deg,#220e06,#100500)'}
+];
+
+var mktChart=null,seasChart=null,rcC=null;
+var analInited=false,mktInited=false,curTheme='desert',ordCtr=2442;
+
+function nav(tab,el){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('panel-'+tab).classList.add('active');
+  el.classList.add('active');
+  if(tab==='market'&&!mktInited){renderMkt();mktInited=true;}
+  if(tab==='analytics'&&!analInited){renderAnal();analInited=true;}
+  if(tab==='collateral'){popCollSel();}
+  if(tab==='roast'){popRoastSel();}
+  if(tab==='orders'){renderOrders();}
+}
+function openM(id){
+  if(id==='add-order'||id==='edit-order'){syncBeans();}
+  document.getElementById('modal-'+id).classList.add('open');
+}
+function closeM(id){document.getElementById('modal-'+id).classList.remove('open');}
+function notify(m){var n=document.getElementById('notif');n.textContent=m;n.classList.add('show');setTimeout(function(){n.classList.remove('show');},3000);}
+function cogs(bn){var b=inv.find(function(x){return x.name===bn;});return b?b.costPerKg:5;}
+
+function renderInvMet(){
+  var tot=inv.reduce(function(s,b){return s+b.stock;},0);
+  var low=inv.filter(function(b){return b.stock<100;}).length;
+  var avgM=(inv.reduce(function(s,b){return s+b.moisture;},0)/inv.length).toFixed(1);
+  var val=inv.reduce(function(s,b){return s+b.stock*(b.costPerKg||6);},0);
+  document.getElementById('inv-metrics').innerHTML=
+    '<div class="metric"><div class="ml">Total Stock</div><div class="mv">'+tot.toLocaleString()+'<span class="mu">kg</span></div><div class="ms up">&#9650; 12% vs last month</div></div>'+
+    '<div class="metric"><div class="ml">Active Lots</div><div class="mv">'+inv.length+'</div><div class="ms" style="color:rgba(253,248,242,.35)">3 continents</div></div>'+
+    '<div class="metric"><div class="ml">Avg Moisture</div><div class="mv">'+avgM+'<span class="mu">%</span></div><div class="ms up">Ideal range</div></div>'+
+    '<div class="metric"><div class="ml">Low Stock</div><div class="mv am">'+low+'</div><div class="ms dn">'+(low>0?'Reorder needed':'All stocked')+'</div></div>'+
+    '<div class="metric"><div class="ml">Inventory Value</div><div class="mv">$'+(val/1000).toFixed(1)+'<span class="mu">k</span></div><div class="ms up">At cost</div></div>'+
+    '<div class="metric"><div class="ml">Roasts (Month)</div><div class="mv">23</div><div class="ms" style="color:rgba(253,248,242,.35)">584 kg processed</div></div>';
+}
+
+function renderInv(){
+  renderInvMet();
+  var rows='';
+  for(var i=0;i<inv.length;i++){
+    var b=inv[i];
+    var sc=b.stock<100?'var(--warn)':'var(--success)';
+    var sw=Math.min(100,b.stock/8);
+    var ns=(b.notes||'').split(',').slice(0,3).map(function(n){return n.trim();}).join(', ');
+    rows+='<tr>'+
+      '<td><div style="font-weight:500;color:var(--cream)">'+b.name+'</div><div style="font-size:10.5px;color:rgba(253,248,242,.3);font-family:\'DM Mono\',monospace;margin-top:1px">'+b.lot+'</div></td>'+
+      '<td><span class="tag to">'+b.origin+'</span></td>'+
+      '<td style="font-size:12px;color:rgba(253,248,242,.55)">'+b.region+'</td>'+
+      '<td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px"><span class="dot" style="background:'+(PC[b.process]||'#888')+'"></span>'+b.process+'</span></td>'+
+      '<td><div style="display:flex;align-items:center"><span class="sbb"><span class="sbf" style="width:'+sw+'%;background:'+sc+'"></span></span><span style="font-family:\'DM Mono\',monospace;font-size:12px">'+b.stock+'</span></div></td>'+
+      '<td style="font-family:\'DM Mono\',monospace;font-size:12px">'+b.moisture+'%</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;font-size:12px">'+b.density+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;font-size:12px">'+b.screen+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;font-size:12px">'+(b.altitude||0).toLocaleString()+'</td>'+
+      '<td style="font-size:12px;color:rgba(253,248,242,.5)">'+b.harvest+'</td>'+
+      '<td style="font-size:11.5px;color:rgba(253,248,242,.55);max-width:170px">'+ns+'</td>'+
+      '<td style="color:'+sc+';font-size:12px">'+(b.stock<100?'&#9888; Low':'&#10003; OK')+'</td>'+
+      '<td><div style="display:flex;gap:5px">'+
+        '<button class="btn btn-g btn-s" onclick="openEditLot('+i+')">Edit</button>'+
+        '<button class="btn btn-g btn-s" onclick="goColl(\''+b.name.replace(/'/g,"\\'")+'\')">'+'Poster</button>'+
+      '</div></td>'+
+    '</tr>';
+  }
+  document.getElementById('inv-body').innerHTML=rows;
+  popRoastSel();syncBeans();popCollSel();
+}
+
+function openEditLot(i){
+  var b=inv[i];
+  document.getElementById('el-name').value=b.name;
+  document.getElementById('el-lot').value=b.lot;
+  document.getElementById('el-origin').value=b.origin;
+  document.getElementById('el-region').value=b.region;
+  document.getElementById('el-proc').value=b.process;
+  document.getElementById('el-harv').value=b.harvest;
+  document.getElementById('el-stock').value=b.stock;
+  document.getElementById('el-moist').value=b.moisture;
+  document.getElementById('el-dens').value=b.density;
+  document.getElementById('el-screen').value=b.screen;
+  document.getElementById('el-alt').value=b.altitude||0;
+  document.getElementById('el-cost').value=b.costPerKg||6;
+  document.getElementById('el-notes').value=b.notes||'';
+  document.getElementById('el-profile').value=b.profile||'';
+  document.getElementById('el-idx').value=i;
+  openM('edit-lot');
+}
+function updateLot(){
+  var i=parseInt(document.getElementById('el-idx').value);
+  inv[i].name=document.getElementById('el-name').value;
+  inv[i].lot=document.getElementById('el-lot').value;
+  inv[i].origin=document.getElementById('el-origin').value;
+  inv[i].region=document.getElementById('el-region').value;
+  inv[i].process=document.getElementById('el-proc').value;
+  inv[i].harvest=document.getElementById('el-harv').value;
+  inv[i].stock=parseFloat(document.getElementById('el-stock').value)||0;
+  inv[i].moisture=parseFloat(document.getElementById('el-moist').value)||11;
+  inv[i].density=parseFloat(document.getElementById('el-dens').value)||750;
+  inv[i].screen=parseInt(document.getElementById('el-screen').value)||16;
+  inv[i].altitude=parseInt(document.getElementById('el-alt').value)||0;
+  inv[i].costPerKg=parseFloat(document.getElementById('el-cost').value)||6;
+  inv[i].notes=document.getElementById('el-notes').value;
+  inv[i].profile=document.getElementById('el-profile').value;
+  closeM('edit-lot');renderInv();notify('Lot updated.');
+}
+function delLot(){var i=parseInt(document.getElementById('el-idx').value);inv.splice(i,1);closeM('edit-lot');renderInv();notify('Lot deleted.');}
+function saveLot(){
+  var name=document.getElementById('nl-name').value.trim();
+  if(!name){notify('Enter a bean name.');return;}
+  inv.push({name:name,lot:document.getElementById('nl-lot').value||'NEW-XX',origin:document.getElementById('nl-origin').value||'Unknown',region:document.getElementById('nl-region').value||'',process:document.getElementById('nl-proc').value,harvest:document.getElementById('nl-harv').value||'2024',stock:parseFloat(document.getElementById('nl-stock').value)||100,moisture:parseFloat(document.getElementById('nl-moist').value)||11,density:parseFloat(document.getElementById('nl-dens').value)||750,screen:parseInt(document.getElementById('nl-screen').value)||16,altitude:parseInt(document.getElementById('nl-alt').value)||1500,costPerKg:parseFloat(document.getElementById('nl-cost').value)||6,notes:document.getElementById('nl-notes').value,profile:document.getElementById('nl-profile').value});
+  closeM('add-lot');renderInv();notify('Lot added!');
+}
+function exportCSV(){
+  var h=['Name','Lot','Origin','Region','Process','Stock','Moisture','Density','Screen','Altitude','Harvest','Cost/kg','Notes'];
+  var rows=inv.map(function(b){return [b.name,b.lot,b.origin,b.region,b.process,b.stock,b.moisture,b.density,b.screen,b.altitude,b.harvest,b.costPerKg,'"'+(b.notes||'')+'"'];});
+  var csv=[h].concat(rows).map(function(r){return r.join(',');}).join('\n');
+  var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='beanbridge_inv.csv';a.click();notify('CSV exported!');
+}
+
+function renderOrdMet(){
+  var active=orders.filter(function(o){return ['Fulfilled','Cancelled'].indexOf(o.status)===-1;});
+  var rev=orders.reduce(function(s,o){return s+o.qty*o.pricePerKg;},0);
+  var profit=orders.reduce(function(s,o){return s+o.qty*(o.pricePerKg-cogs(o.bean));},0);
+  var kgP=active.reduce(function(s,o){return s+o.qty;},0);
+  var mgn=rev>0?((profit/rev)*100).toFixed(0):0;
+  document.getElementById('ord-metrics').innerHTML=
+    '<div class="metric"><div class="ml">Active Orders</div><div class="mv am">'+active.length+'</div><div class="ms">Awaiting roast</div></div>'+
+    '<div class="metric"><div class="ml">Total Revenue</div><div class="mv">$'+(rev/1000).toFixed(1)+'<span class="mu">k</span></div><div class="ms up">All orders</div></div>'+
+    '<div class="metric"><div class="ml">Gross Profit</div><div class="mv up">$'+(profit/1000).toFixed(1)+'<span class="mu">k</span></div><div class="ms">After COGS</div></div>'+
+    '<div class="metric"><div class="ml">Avg Margin</div><div class="mv up">'+mgn+'<span class="mu">%</span></div><div class="ms">Blended gross</div></div>'+
+    '<div class="metric"><div class="ml">Kg to Roast</div><div class="mv">'+kgP+'<span class="mu">kg</span></div><div class="ms">Active queue</div></div>'+
+    '<div class="metric"><div class="ml">Fulfilled</div><div class="mv">'+orders.filter(function(o){return o.status==='Fulfilled';}).length+'</div><div class="ms" style="color:rgba(253,248,242,.35)">Completed</div></div>';
+}
+function renderOrders(){
+  renderOrdMet();
+  var rows='';
+  for(var i=0;i<orders.length;i++){
+    var o=orders[i];
+    var rev=o.qty*o.pricePerKg;
+    var cg=o.qty*cogs(o.bean);
+    var pft=rev-cg;
+    var mgn=rev>0?((pft/rev)*100).toFixed(0):0;
+    var mc=pft>0?'var(--success)':'var(--danger)';
+    rows+='<tr>'+
+      '<td style="font-family:\'DM Mono\',monospace;font-size:11.5px">'+o.id+'</td>'+
+      '<td>'+o.customer+'</td>'+
+      '<td><span class="tag" style="background:rgba(91,155,213,.12);color:#5B9BD5;border:1px solid rgba(91,155,213,.2);font-size:11px">'+o.type+'</span></td>'+
+      '<td style="font-size:12px">'+o.bean+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace">'+o.qty+'</td>'+
+      '<td style="font-size:12px">'+o.roast+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace">$'+o.pricePerKg.toFixed(2)+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace">$'+rev.toLocaleString()+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;color:rgba(253,248,242,.5)">$'+Math.round(cg).toLocaleString()+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;color:'+mc+'">$'+Math.round(pft).toLocaleString()+'</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;color:'+mc+'">'+mgn+'%</td>'+
+      '<td style="font-family:\'DM Mono\',monospace;font-size:11.5px">'+o.due+'</td>'+
+      '<td style="color:'+(OSC[o.status]||'var(--cream)')+';font-size:12px">'+o.status+'</td>'+
+      '<td><button class="btn btn-g btn-s" onclick="openEditOrd('+i+')">Edit</button></td>'+
+    '</tr>';
+  }
+  document.getElementById('ord-body').innerHTML=rows;
+}
+function syncBeans(){
+  ['no-bean','eo-bean'].forEach(function(id){
+    var s=document.getElementById(id);
+    if(s)s.innerHTML=inv.map(function(b){return '<option>'+b.name+'</option>';}).join('');
+  });
+}
+function saveOrder(){
+  orders.unshift({id:'ORD-'+ordCtr++,customer:document.getElementById('no-cust').value||'Unknown',type:document.getElementById('no-type').value,bean:document.getElementById('no-bean').value,qty:parseFloat(document.getElementById('no-qty').value)||1,pricePerKg:parseFloat(document.getElementById('no-price').value)||18,roast:document.getElementById('no-roast').value,due:document.getElementById('no-due').value||'TBD',status:'Pending'});
+  closeM('add-order');renderOrders();notify('Order added!');
+}
+function openEditOrd(i){
+  var o=orders[i];syncBeans();
+  document.getElementById('eo-cust').value=o.customer;
+  document.getElementById('eo-type').value=o.type;
+  document.getElementById('eo-bean').value=o.bean;
+  document.getElementById('eo-qty').value=o.qty;
+  document.getElementById('eo-price').value=o.pricePerKg;
+  document.getElementById('eo-roast').value=o.roast;
+  document.getElementById('eo-due').value=o.due;
+  document.getElementById('eo-status').value=o.status;
+  document.getElementById('eo-idx').value=i;
+  openM('edit-order');
+}
+function updateOrder(){
+  var i=parseInt(document.getElementById('eo-idx').value);
+  orders[i].customer=document.getElementById('eo-cust').value;
+  orders[i].type=document.getElementById('eo-type').value;
+  orders[i].bean=document.getElementById('eo-bean').value;
+  orders[i].qty=parseFloat(document.getElementById('eo-qty').value)||1;
+  orders[i].pricePerKg=parseFloat(document.getElementById('eo-price').value)||18;
+  orders[i].roast=document.getElementById('eo-roast').value;
+  orders[i].due=document.getElementById('eo-due').value;
+  orders[i].status=document.getElementById('eo-status').value;
+  closeM('edit-order');renderOrders();notify('Order updated.');
+}
+function delOrder(){var i=parseInt(document.getElementById('eo-idx').value);orders.splice(i,1);closeM('edit-order');renderOrders();notify('Order deleted.');}
+</script>
+<script>
+function popRoastSel(){var s=document.getElementById('rb');if(!s)return;s.innerHTML='<option value="">&#8212; select &#8212;</option>'+inv.map(function(b){return '<option value="'+b.name+'">'+b.name+'</option>';}).join('');}
+function prevBean(){var b=inv.find(function(x){return x.name===document.getElementById('rb').value;});var p=document.getElementById('bean-prev');if(b){p.style.display='block';p.textContent=b.origin+' \u00b7 '+b.region+'\n'+b.process+' \u00b7 Screen '+b.screen+' \u00b7 '+(b.altitude||0).toLocaleString()+'m\nMoisture '+b.moisture+'% \u00b7 Density '+b.density+' g/L\nNotes: '+(b.notes||'\u2014');}else{p.style.display='none';}}
+
+function genRoast(){
+  var name=document.getElementById('rb').value;
+  if(!name){notify('Select a bean lot first.');return;}
+  var b=inv.find(function(x){return x.name===name;});
+  if(!b)return;
+  var lvlMap={'Light (City)':0,'Medium-light (City+)':1,'Medium (Full City)':2,'Medium-dark (Full City+)':3,'Dark (Vienna / French)':4};
+  var lvl=lvlMap[document.getElementById('rt').value]||1;
+  var use=document.getElementById('ru').value;
+  var charge=parseInt(document.getElementById('cov').textContent)||200;
+  var amb=parseInt(document.getElementById('aov').textContent)||22;
+  var hum=parseInt(document.getElementById('hov').textContent)||55;
+  var moisture=b.moisture||11;
+  var density=b.density||750;
+  var proc=b.process||'Washed';
+  var dAdj=density>770?-3:density<710?4:0;
+  var mAdj=moisture>12?2:moisture<10.5?-2:0;
+  var hAdj=hum>70?1:hum<35?-1:0;
+  var pAdj=proc==='Natural'?3:proc==='Honey'?1:0;
+  var baseFC=[192,196,197,198,200][lvl]+dAdj+mAdj;
+  var baseDrop=[200,207,212,218,226][lvl]+dAdj+mAdj+pAdj;
+  var baseTime=[9,11,12,13,15][lvl];
+  var baseDevR=[18,21,22,24,26][lvl];
+  var baseROR=[12,10,9,8,7][lvl];
+  if(hum>70){baseDrop-=2;baseFC-=1;}
+  if(amb<10)baseTime+=1;
+  var dryEnd=155+dAdj;
+  var phases=[
+    {phase:'Drying',st:(charge-15),et:dryEnd,dur:(proc==='Natural'?'5\u20137':'4\u20136')+' min',air:hum>65?'low':'low\u2013medium',note:'Evaporate surface moisture evenly. Watch for steaming to subside.'},
+    {phase:'Maillard',st:dryEnd,et:(baseFC-12),dur:(lvl>=3?'4\u20136':'3\u20135')+' min',air:'medium\u2013high',note:'Browning reactions develop sweetness and complexity. Hold ROR at '+baseROR+'\u00b0C/min.'},
+    {phase:'Development',st:(baseFC-12),et:baseDrop,dur:(lvl>=3?'2.5\u20134':'2\u20133')+' min',air:proc==='Natural'?'medium-high':'high',note:'Post-first-crack. Drop at '+baseDrop+'\u00b0C for target roast level.'}
+  ];
+  var notes=(b.notes||'caramel,chocolate').split(',').map(function(n){return n.trim();}).filter(Boolean).slice(0,4);
+  var watchPoints=[];
+  if(hum>70)watchPoints.push('High ambient humidity \u2014 extend drying phase, watch for tipping on entry');
+  if(moisture>12)watchPoints.push('High bean moisture \u2014 expect prolonged drying, do not rush Maillard');
+  if(density>780)watchPoints.push('Dense bean \u2014 increase charge temp 5\u00b0C or extend total time 1 min');
+  if(proc==='Natural')watchPoints.push('Natural process \u2014 ferment notes amplify with heat, watch development closely');
+  if(!watchPoints.length)watchPoints.push('Bean parameters within normal range \u2014 standard profile should perform well');
+  var brewTips={Espresso:'Pull at 93\u00b0C, 1:2 ratio, 28\u201332s for best extraction.','Pour-over / filter':'Brew at 94\u00b0C, 1:15 ratio, 3\u20134 min total with bloom.','Cold brew':'Coarse grind, 1:8, steep 16\u201318 hrs at room temp.',Aeropress:'Inverted, 90\u00b0C, 1:12, 2 min steep, gentle press.','Omni-roast':'Try 93\u00b0C espresso or 94\u00b0C filter for different expressions.'};
+  var brewTip=brewTips[use]||'Brew at 93\u201394\u00b0C for best results.';
+  var denseWord=density>770?'dense, high-altitude':'softer, lower-density';
+  var summary='This '+denseWord+' '+proc.toLowerCase()+'-processed bean from '+b.origin+' (moisture '+moisture+'%, '+density+' g/L) benefits from a controlled development approach. '+(hum>65?'Elevated humidity today warrants a slower drying phase. ':'Ambient conditions are favorable. ')+'Target ROR '+baseROR+'\u00b0C/min through Maillard for optimal flavor clarity.';
+  var pc=['#5B9BD5','#C07A2F','#E05C5C'];
+  var h='<div class="cl">Strategy Output</div>';
+  h+='<div style="font-size:12.5px;color:rgba(253,248,242,.72);line-height:1.75;margin-bottom:14px;padding:11px;background:rgba(255,255,255,.03);border-radius:8px">'+summary+'</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px">';
+  
+  var statLabels=['First Crack','Drop Temp','Total Time','Dev Ratio'];
+  var statVals=[baseFC+'\u00b0C',baseDrop+'\u00b0C',baseTime+' min',baseDevR+'%'];
+  h='<div class="cl">Strategy Output</div>';
+  h+='<div style="font-size:12.5px;color:rgba(253,248,242,.72);line-height:1.75;margin-bottom:14px;padding:11px;background:rgba(255,255,255,.03);border-radius:8px">'+summary+'</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px">';
+  for(var si=0;si<statLabels.length;si++){h+='<div style="text-align:center;padding:9px 4px;background:rgba(255,255,255,.04);border-radius:7px;border:1px solid var(--border)"><div style="font-size:9px;color:rgba(253,248,242,.28);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">'+statLabels[si]+'</div><div style="font-family:\'DM Mono\',monospace;color:var(--caramel);font-size:13px">'+statVals[si]+'</div></div>';}
+  h+='</div><div style="font-size:9.5px;letter-spacing:.7px;text-transform:uppercase;color:rgba(253,248,242,.28);margin-bottom:9px">Phases</div>';
+  for(var pi=0;pi<phases.length;pi++){var ph=phases[pi];h+='<div class="pstep"><div class="psn">'+(pi+1)+'</div><div><div class="pst"><strong style="color:'+pc[pi]+'">'+ph.phase+'</strong> \u2014 '+ph.st+'\u2192'+ph.et+'\u00b0C \u00b7 '+ph.dur+' \u00b7 '+ph.air+'</div><div class="psd">'+ph.note+'</div></div></div>';}
+  h+='<div style="margin-top:12px"><div style="font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;color:rgba(253,248,242,.28);margin-bottom:6px">Expected Flavors</div><div>';
+  for(var ni=0;ni<notes.length;ni++)h+='<span class="pill">'+notes[ni]+'</span>';
+  h+='</div></div><div class="wbox">';
+  for(var wi=0;wi<watchPoints.length;wi++)h+='\u26a0 '+watchPoints[wi]+'<br>';
+  h+='</div><div class="ibox">\u2615 '+brewTip+'</div>';
+  h+='<div class="cw" style="height:165px;margin-top:14px"><canvas id="rcurve" role="img" aria-label="Roast curve">Curve.</canvas></div>';
+  document.getElementById('roast-out').innerHTML=h;
+  var pts=[],lbs=[],totalSec=baseTime*60;
+  for(var s=0;s<=totalSec;s+=15){var t=s/totalSec;pts.push(parseFloat((charge+(baseDrop-charge)*Math.pow(t,0.65)+Math.sin(t*Math.PI*2)*1.5).toFixed(1)));lbs.push(s%60===0?Math.round(s/60)+'m':'');}
+  if(rcC)rcC.destroy();
+  rcC=new Chart(document.getElementById('rcurve'),{type:'line',data:{labels:lbs,datasets:[{data:pts,borderColor:'#C07A2F',borderWidth:2,pointRadius:0,tension:0.4,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},maxTicksLimit:10},grid:{color:'rgba(255,255,255,.04)'}},y:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},callback:function(v){return v+'\u00b0C';}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+}
+
+function tickMkt(){mktData.forEach(function(m){var d=((Math.random()-.48)*.015);m.change=parseFloat(d.toFixed(4));m.price=parseFloat((m.price+d).toFixed(4));});renderMktCards();renderCostTbl();genRec();notify('Prices refreshed.');}
+function genRec(){
+  var low=inv.filter(function(b){return b.stock<120;});
+  var rising=mktData.filter(function(m){return m.change>0;}).map(function(m){return m.name;});
+  var falling=mktData.filter(function(m){return m.change<0;}).map(function(m){return m.name;});
+  var rec='';
+  if(low.length)rec+='<strong style="color:var(--warn)">\u26a0 Reorder Alert:</strong> '+low.map(function(b){return b.name;}).join(', ')+' critically low. ';
+  if(rising.length)rec+='Prices rising on '+rising.slice(0,2).join(' & ')+' \u2014 consider locking in current stock. ';
+  if(falling.length)rec+=falling[0]+' softening \u2014 potential buying opportunity. ';
+  var hm=inv.filter(function(b){return (b.costPerKg||6)<5.5;});
+  if(hm.length)rec+='<strong style="color:var(--success)">Best margin:</strong> '+hm[0].origin+' lots offer highest gross margin \u2014 prioritize for wholesale.';
+  document.getElementById('rec-body').innerHTML=rec||'Market conditions nominal. No immediate action required.';
+}
+function renderMktCards(){document.getElementById('mkt-cards').innerHTML=mktData.map(function(m){return '<div class="pc"><div class="pt">'+m.ticker+'</div><div class="pn">'+m.name+'</div><div class="pval">$'+m.price.toFixed(3)+'</div><div class="pch" style="color:'+(m.change>=0?'var(--success)':'var(--danger)')+'">'+(m.change>=0?'\u25b2':'\u25bc')+' '+Math.abs(m.change).toFixed(4)+' $/lb</div></div>';}).join('');}
+function renderCostTbl(){document.getElementById('cost-body').innerHTML=inv.map(function(b){var pp=PM[b.origin]||2.5;var kp=pp*2.20462;var tv=(b.stock*kp).toFixed(0);var cps=(kp/100).toFixed(3);var sig=pp<2.2?'Strong':pp<3.0?'Moderate':'Premium';var sc=pp<2.2?'var(--success)':pp<3.0?'var(--warn)':'var(--info)';return '<tr><td>'+b.origin+'</td><td style="font-family:\'DM Mono\',monospace">'+b.stock+'</td><td style="font-family:\'DM Mono\',monospace">$'+pp.toFixed(3)+'</td><td style="font-family:\'DM Mono\',monospace">$'+parseInt(tv).toLocaleString()+'</td><td style="font-family:\'DM Mono\',monospace">$'+kp.toFixed(2)+'</td><td style="font-family:\'DM Mono\',monospace">$'+cps+'</td><td style="color:'+sc+'">'+sig+'</td></tr>';}).join('');}
+function renderMkt(){
+  mktData.forEach(function(m){m.change=((Math.random()-.48)*.015);});
+  renderMktCards();genRec();
+  var days=[],prices=[],p=2.05;
+  for(var i=90;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);days.push(i%10===0?d.toLocaleDateString('en',{month:'short',day:'numeric'}):'');p+=((Math.random()-.48)*.018);prices.push(parseFloat(p.toFixed(4)));}
+  if(mktChart)mktChart.destroy();
+  mktChart=new Chart(document.getElementById('mktChart'),{type:'line',data:{labels:days,datasets:[{data:prices,borderColor:'#C07A2F',borderWidth:1.5,pointRadius:0,fill:true,backgroundColor:'rgba(192,122,47,.07)',tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},maxTicksLimit:8},grid:{color:'rgba(255,255,255,.04)'}},y:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},callback:function(v){return '$'+v.toFixed(2);}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+  var seasonal=[98,96,100,103,105,102,99,97,101,104,103,100];
+  if(seasChart)seasChart.destroy();
+  seasChart=new Chart(document.getElementById('seasChart'),{type:'bar',data:{labels:['J','F','M','A','M','J','J','A','S','O','N','D'],datasets:[{data:seasonal,backgroundColor:seasonal.map(function(v){return v>=103?'rgba(192,122,47,.75)':'rgba(192,122,47,.3)';}),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10}},grid:{display:false}},y:{min:90,ticks:{color:'rgba(253,248,242,.28)',font:{size:10}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+  renderCostTbl();
+}
+
+function renderAnal(){
+  analInited=true;fetchWx();
+  var tot=inv.reduce(function(s,b){return s+b.stock;},0);
+  var rev=orders.reduce(function(s,o){return s+o.qty*o.pricePerKg;},0);
+  var profit=orders.reduce(function(s,o){return s+o.qty*(o.pricePerKg-cogs(o.bean));},0);
+  var mgn=rev>0?((profit/rev)*100).toFixed(0):0;
+  document.getElementById('anal-metrics').innerHTML=
+    '<div class="metric"><div class="ml">Total Inventory</div><div class="mv">'+tot.toLocaleString()+'<span class="mu">kg</span></div><div class="ms up">\u25b2 12% MoM</div></div>'+
+    '<div class="metric"><div class="ml">Lots Tracked</div><div class="mv">'+inv.length+'</div><div class="ms" style="color:rgba(253,248,242,.35)">3 continents</div></div>'+
+    '<div class="metric"><div class="ml">Order Revenue</div><div class="mv">$'+(rev/1000).toFixed(1)+'<span class="mu">k</span></div><div class="ms up">All-time</div></div>'+
+    '<div class="metric"><div class="ml">Gross Margin</div><div class="mv up">'+mgn+'<span class="mu">%</span></div><div class="ms">Blended</div></div>';
+  var origHtml='';
+  for(var i=0;i<inv.length;i++){var b=inv[i];origHtml+='<div class="or"><span style="min-width:85px;color:rgba(253,248,242,.72);font-size:12.5px">'+b.origin+'</span><div class="obb"><div class="obf" style="width:'+(b.stock/tot*100).toFixed(0)+'%"></div></div><span style="font-family:\'DM Mono\',monospace;font-size:11px;color:rgba(253,248,242,.4);min-width:52px;text-align:right">'+b.stock+' kg</span></div>';}
+  document.getElementById('orig-list').innerHTML=origHtml;
+  new Chart(document.getElementById('moistChart'),{type:'bar',data:{labels:inv.map(function(b){return b.origin;}),datasets:[{data:inv.map(function(b){return b.moisture;}),backgroundColor:'rgba(192,122,47,.55)',borderColor:'#C07A2F',borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:9.5},maxRotation:40},grid:{display:false}},y:{min:9,max:14,ticks:{color:'rgba(253,248,242,.28)',font:{size:10},callback:function(v){return v+'%';}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+  new Chart(document.getElementById('thruChart'),{type:'bar',data:{labels:['Nov','Dec','Jan','Feb','Mar','Apr'],datasets:[{data:[480,510,430,560,620,584],backgroundColor:['rgba(192,122,47,.32)','rgba(192,122,47,.32)','rgba(192,122,47,.32)','rgba(192,122,47,.32)','rgba(192,122,47,.32)','rgba(192,122,47,.75)'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10}},grid:{display:false}},y:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},callback:function(v){return v+' kg';}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+  var distD=[22,35,30,13],distL=['Light','Med-Light','Medium','Med-Dark'],distC=['#C07A2F','#A0622A','#7A4420','#5A2E10'];
+  new Chart(document.getElementById('distChart'),{type:'doughnut',data:{labels:distL,datasets:[{data:distD,backgroundColor:distC,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'62%'}});
+  var dleg='';for(var di=0;di<distL.length;di++)dleg+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="width:9px;height:9px;border-radius:2px;background:'+distC[di]+';flex-shrink:0"></span><span>'+distL[di]+' <span style="color:rgba(253,248,242,.32);font-size:11px">'+distD[di]+'%</span></span></div>';
+  document.getElementById('dist-leg').innerHTML=dleg;
+  var pC={};inv.forEach(function(b){pC[b.process]=(pC[b.process]||0)+b.stock;});
+  new Chart(document.getElementById('procChart'),{type:'bar',data:{labels:Object.keys(pC),datasets:[{data:Object.values(pC),backgroundColor:Object.keys(pC).map(function(k){return PC[k]||'#888';}),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10}},grid:{display:false}},y:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},callback:function(v){return v+' kg';}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+  var beans=[],seen={};orders.forEach(function(o){if(!seen[o.bean]&&beans.length<5){beans.push(o.bean);seen[o.bean]=1;}});
+  var revB=beans.map(function(bn){return orders.filter(function(o){return o.bean===bn;}).reduce(function(s,o){return s+o.qty*o.pricePerKg;},0);});
+  var cogB=beans.map(function(bn){return orders.filter(function(o){return o.bean===bn;}).reduce(function(s,o){return s+o.qty*cogs(o.bean);},0);});
+  new Chart(document.getElementById('revChart'),{type:'bar',data:{labels:beans.map(function(b){return b.split(' ').slice(0,2).join(' ');}),datasets:[{label:'Revenue',data:revB,backgroundColor:'rgba(192,122,47,.7)',borderWidth:0},{label:'COGS',data:cogB,backgroundColor:'rgba(224,92,92,.5)',borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'rgba(253,248,242,.5)',font:{size:11}}}},scales:{x:{ticks:{color:'rgba(253,248,242,.28)',font:{size:9.5},maxRotation:30},grid:{display:false}},y:{ticks:{color:'rgba(253,248,242,.28)',font:{size:10},callback:function(v){return '$'+v;}},grid:{color:'rgba(255,255,255,.04)'}}}}});
+  var sC={};orders.forEach(function(o){sC[o.status]=(sC[o.status]||0)+1;});
+  new Chart(document.getElementById('ordChart'),{type:'doughnut',data:{labels:Object.keys(sC),datasets:[{data:Object.values(sC),backgroundColor:Object.keys(sC).map(function(k){return OSC[k]||'#888';}),borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'rgba(253,248,242,.5)',font:{size:11}}}},cutout:'55%'}});
+}
+function fetchWx(){
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=41.7014&longitude=-71.1550&current=temperature_2m,relative_humidity_2m,wind_speed_10m,surface_pressure,dew_point_2m&temperature_unit=fahrenheit&wind_speed_unit=mph').then(function(r){return r.json();}).then(function(d){
+    var c=d.current;
+    document.getElementById('wt').textContent=Math.round(c.temperature_2m)+'\u00b0F';
+    document.getElementById('wc').textContent='Fall River, MA \u2014 Roastery';
+    document.getElementById('wh').textContent='Humidity: '+c.relative_humidity_2m+'%';
+    document.getElementById('ww').textContent=Math.round(c.wind_speed_10m)+' mph';
+    document.getElementById('wp').textContent=Math.round(c.surface_pressure)+' hPa';
+    document.getElementById('wdp').textContent=Math.round((c.dew_point_2m-32)*5/9)+'\u00b0C';
+    document.getElementById('wb').textContent=c.surface_pressure>1013?'High':'Low';
+    var h=c.relative_humidity_2m,t=(c.temperature_2m-32)*5/9;
+    var imp=h>70?'\u26a0 High humidity ('+h+'%) \u2014 extend drying phase, moderate early airflow.':h<35?'\u26a0 Low humidity ('+h+'%) \u2014 reduce target drop temp 2\u20133\u00b0C.':'\u2713 Humidity ('+h+'%) within optimal range. Standard profiles should perform nominally.';
+    if(t<5)imp+=' Cold ambient \u2014 add 4\u20135 min drum pre-heat.';else if(t>30)imp+=' Warm \u2014 watch charge overshoot.';
+    document.getElementById('wi').textContent=imp;
+  }).catch(function(){document.getElementById('wi').textContent='Weather unavailable.';});
+}
+</script>
+<script>
+function buildThemes(){document.getElementById('theme-row').innerHTML=THEMES.map(function(t,i){return '<button class="tbtn'+(i===0?' ta':'')+'" onclick="setTheme(\''+t.id+'\',this)" style="border-color:'+(i===0?t.accent:'rgba(255,255,255,.09)')+'">'+t.label+'</button>';}).join('');}
+function setTheme(id,btn){curTheme=id;document.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('ta');b.style.borderColor='rgba(255,255,255,.09)';});var th=THEMES.find(function(t){return t.id===id;});btn.classList.add('ta');btn.style.borderColor=th.accent;applyTheme(th);var n=document.getElementById('coll-lot').value;var b=inv.find(function(x){return x.name===n;});if(b)drawArt(b.origin,th.accent);}
+function applyTheme(th){document.getElementById('live-poster').style.background=th.bg;document.getElementById('p-abar').style.background=th.accent;document.getElementById('p-olab').style.color=th.accent+'90';document.getElementById('p-tagline').style.color=th.accent+'C0';}
+function popCollSel(){var s=document.getElementById('coll-lot');if(!s)return;s.innerHTML='<option value="">\u2014 select \u2014</option>'+inv.map(function(b){return '<option value="'+b.name+'">'+b.name+'</option>';}).join('');}
+function onCollLot(){var n=document.getElementById('coll-lot').value;var b=inv.find(function(x){return x.name===n;});var pr=document.getElementById('coll-prev');if(b){pr.style.display='block';pr.textContent=b.origin+' \u00b7 '+b.region+'\n'+b.process+' \u00b7 '+(b.altitude||0).toLocaleString()+'m \u00b7 Screen '+b.screen+'\nMoisture '+b.moisture+'% \u00b7 Density '+b.density+' g/L\nNotes: '+(b.notes||'\u2014')+'\n'+(b.profile||'');}else pr.style.display='none';refreshPoster();}
+function refreshPoster(){
+  var n=document.getElementById('coll-lot').value;var b=inv.find(function(x){return x.name===n;});if(!b)return;
+  var roast=document.getElementById('coll-roast').value;var brand=document.getElementById('coll-brand').value||'Roastery';
+  var th=THEMES.find(function(t){return t.id===curTheme;})||THEMES[0];
+  document.getElementById('live-poster').style.background=th.bg;
+  document.getElementById('p-brand').textContent=brand.toUpperCase();
+  document.getElementById('p-lot').textContent='LOT '+b.lot;
+  document.getElementById('p-olab').textContent=(b.origin+' \u00b7 '+b.region).toUpperCase();
+  document.getElementById('p-olab').style.color=th.accent+'90';
+  document.getElementById('p-name').textContent=b.name;
+  document.getElementById('p-reg').textContent=b.region;
+  document.getElementById('p-alt').textContent=(b.altitude||0).toLocaleString()+'m';
+  document.getElementById('p-proc').textContent=b.process;
+  document.getElementById('p-rlv').textContent=roast;
+  document.getElementById('p-harvest').textContent='HARVEST '+(b.harvest||'2024');
+  document.getElementById('p-abar').style.background=th.accent;
+  document.getElementById('p-tagline').style.color=th.accent+'C0';
+  var notes=(b.notes||'').split(',').map(function(n){return n.trim();}).filter(Boolean);
+  document.getElementById('p-flavors').innerHTML=notes.map(function(n){return '<span class="pfp">'+n+'</span>';}).join('');
+  drawArt(b.origin,th.accent);
+}
+function goColl(name){document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.nb')[5].classList.add('active');document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});document.getElementById('panel-collateral').classList.add('active');popCollSel();setTimeout(function(){document.getElementById('coll-lot').value=name;onCollLot();},80);}
+function genColl(){
+  var n=document.getElementById('coll-lot').value;var b=inv.find(function(x){return x.name===n;});
+  if(!b){notify('Select a lot first.');return;}
+  var roast=document.getElementById('coll-roast').value;var brand=document.getElementById('coll-brand').value||'Summit Roasters';
+  refreshPoster();
+  var notes=(b.notes||'caramel,chocolate').split(',').map(function(n){return n.trim();}).filter(Boolean);
+  var taglines={Ethiopia:'Where Coffee Was Born',Colombia:'Grown Among the Clouds',Guatemala:'Fire and Forest, Cup and Stone',Kenya:'Bold. Bright. Untamed.',Brazil:'Slow Hills, Sweet Cup','Costa Rica':'Rainforest Clarity',Yemen:'Ancient Grounds, Timeless Cup'};
+  var tagline=taglines[b.origin]||'Single Origin, Pure Character';
+  var roastDesc={Light:'Bright & Floral','Medium-Light':'Crisp & Sweet',Medium:'Balanced & Rich','Medium-Dark':'Deep & Caramel',Dark:'Bold & Bittersweet'};
+  var variantLabel=roastDesc[roast]||'Single Origin';
+  var procWord={Washed:'clean, transparent cup',Natural:'wild, fruit-forward cup',Honey:'sweet, silky cup',Anaerobic:'complex, fermented cup'};
+  var procDesc=procWord[b.process]||'nuanced cup';
+  var bagDesc='Sourced from the '+b.region+' region of '+b.origin+' at '+(b.altitude||0).toLocaleString()+' meters above sea level, this '+b.process.toLowerCase()+'-processed lot delivers a '+procDesc+' that captures the essence of its terroir. Harvested in '+(b.harvest||'2024')+', the beans arrive with notable density and clarity. Expect '+(notes.slice(0,2).join(' and ')||'complexity')+' on the nose, with '+(notes[2]||'a clean finish')+' lingering long after the last sip.';
+  var brewMap={Washed:'Pour-over at 94\u00b0C highlights its clarity perfectly.',Natural:'French press at 92\u00b0C draws out the full body.',Honey:'Aeropress unlocks the inherent sweetness beautifully.',Anaerobic:'Espresso showcases the complex ferment character.'};
+  var brewTip=brewMap[b.process]||'Best enjoyed as pour-over at 93\u00b0C.';
+  var counterCard='"'+(notes.slice(0,2).join(', '))+' \u2014 from '+(b.altitude||0)+'m in '+b.origin+'."';
+  var social='Single origin from '+b.origin+'. '+(notes.slice(0,3).join(' \u00b7 '))+'. Now roasting. #specialtycoffee #'+(b.origin.toLowerCase().replace(/\s/g,''))+' #singleorigin';
+  document.getElementById('p-tagline').textContent=variantLabel;
+  document.getElementById('p-flavors').innerHTML=notes.slice(0,4).map(function(n){return '<span class="pfp">'+n+'</span>';}).join('');
+  document.getElementById('copy-box').textContent='TAGLINE\n"'+tagline+'"\n\nBAG DESCRIPTION\n'+bagDesc+'\n\nTASTING NOTES\n'+notes.join(' \u00b7 ')+'\n\nBREW TIP\n'+brewTip+'\n\nCOUNTER CARD\n'+counterCard+'\n\nSOCIAL CAPTION\n'+social;
+  notify('Collateral generated!');
+}
+function copyText(){navigator.clipboard.writeText(document.getElementById('copy-box').textContent).then(function(){notify('Copied!');}).catch(function(){notify('Select text manually to copy.');});}
+function dlPoster(){notify('Right-click the poster and Save Image, or take a screenshot.');}
+</script>
+<script>
+function drawArt(origin,accent){var fn={Ethiopia:ethArt,Colombia:colArt,Guatemala:gtmArt,Kenya:kenArt,Brazil:brzArt,'Costa Rica':criArt,Yemen:yemArt}[origin]||defArt;document.getElementById('part').innerHTML=fn(accent||'#C07A2F');}
+function S(arr){return arr.join('');}
+function ethArt(a){return S(['<defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#12082a"/><stop offset="30%" stop-color="#8b2a18"/><stop offset="58%" stop-color="#e8622a"/><stop offset="80%" stop-color="#f4a040"/><stop offset="100%" stop-color="#fcd878"/></linearGradient><radialGradient id="es" cx="34%" cy="60%" r="20%"><stop offset="0%" stop-color="#fff5a0"/><stop offset="30%" stop-color="#ffc030" stop-opacity="0.9"/><stop offset="100%" stop-color="#ff6000" stop-opacity="0"/></radialGradient></defs>','<rect width="380" height="300" fill="url(#eg)"/>','<ellipse cx="130" cy="180" rx="80" ry="80" fill="url(#es)"/>','<circle cx="130" cy="180" r="32" fill="#ffe060" opacity="0.95"/>','<circle cx="130" cy="180" r="26" fill="#fff4a0" opacity="0.9"/>','<path d="M0,195 Q40,168 85,180 Q120,158 160,172 Q200,148 240,162 Q275,145 315,156 Q348,148 380,153 L380,220 L0,220Z" fill="#3d1a5a" opacity="0.85"/>','<path d="M0,212 Q50,192 100,202 Q150,182 198,194 Q245,175 288,188 Q332,178 380,184 L380,240 L0,240Z" fill="#5a2a1a" opacity="0.9"/>','<path d="M0,234 Q90,222 190,228 Q280,218 380,223 L380,300 L0,300Z" fill="#8b4a14"/>','<rect x="0" y="250" width="380" height="50" fill="#6a3410"/>','<rect x="49" y="204" width="5" height="38" fill="#0d0703" rx="2"/>','<ellipse cx="52" cy="200" rx="26" ry="9" fill="#0a0602"/>','<ellipse cx="34" cy="205" rx="14" ry="6" fill="#0e0a06"/>','<ellipse cx="70" cy="204" rx="16" ry="6" fill="#0e0a06"/>','<rect x="168" y="210" width="4" height="32" fill="#0d0703" rx="2"/>','<ellipse cx="170" cy="206" rx="30" ry="10" fill="#0a0602"/>','<ellipse cx="148" cy="211" rx="16" ry="6" fill="#0e0a06"/>','<ellipse cx="192" cy="209" rx="18" ry="6" fill="#0e0a06"/>','<rect x="308" y="212" width="4" height="30" fill="#0d0703" rx="2"/>','<ellipse cx="310" cy="208" rx="24" ry="8" fill="#0a0602"/>','<path d="M320,300 Q315,272 322,254 Q330,237 318,224" fill="none" stroke="#3a1e08" stroke-width="3"/>','<path d="M322,254 Q338,247 345,249" fill="none" stroke="#3a1e08" stroke-width="2"/>','<circle cx="347" cy="248" r="6" fill="#d42c18"/>','<circle cx="355" cy="245" r="5.5" fill="#b82214"/>','<circle cx="341" cy="253" r="5" fill="#e03520"/>','<path d="M318,239 Q302,233 296,236" fill="none" stroke="#3a1e08" stroke-width="2"/>','<circle cx="293" cy="235" r="5.5" fill="#c82816"/>','<circle cx="286" cy="239" r="5" fill="#d42e18"/>','<circle cx="50" cy="28" r="1.5" fill="white" opacity="0.8"/>','<circle cx="110" cy="16" r="1.2" fill="white" opacity="0.7"/>','<circle cx="195" cy="22" r="1.8" fill="white" opacity="0.85"/>','<circle cx="270" cy="12" r="1" fill="white" opacity="0.65"/>','<circle cx="345" cy="30" r="1.4" fill="white" opacity="0.75"/>','<circle cx="320" cy="20" r="1.2" fill="white" opacity="0.6"/>']);}
+function colArt(a){var rows='',buds='';for(var i=0;i<10;i++){var y=252+i*4;rows+='<path d="M'+(i*2)+','+y+' Q95,'+(y-6)+' 190,'+(y-1)+' Q285,'+(y-7)+' 380,'+(y-3)+'" fill="none" stroke="#1a6028" stroke-width="2" opacity="'+(0.45+i*0.05)+'"/>';}for(var j=0;j<7;j++)buds+='<circle cx="'+(22+j*52)+'" cy="251" r="3" fill="#c83020" opacity="0.9"/>';return S(['<defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e2848"/><stop offset="40%" stop-color="#1a6898"/><stop offset="75%" stop-color="#38a8c8"/><stop offset="100%" stop-color="#70c8e0"/></linearGradient><linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#28783a"/><stop offset="100%" stop-color="#154820"/></linearGradient><linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38a040"/><stop offset="100%" stop-color="#206030"/></linearGradient><linearGradient id="h3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#50c858"/><stop offset="100%" stop-color="#2a7830"/></linearGradient></defs>','<rect width="380" height="300" fill="url(#cg)"/>','<path d="M145,90 L192,16 L238,90Z" fill="#d0e8f8" opacity="0.95"/>','<path d="M158,90 L192,32 L226,90Z" fill="white" opacity="0.9"/>','<path d="M175,90 L192,50 L208,90Z" fill="white"/>','<path d="M0,118 Q45,88 88,104 Q125,78 168,94 Q205,72 248,88 Q285,68 325,82 Q352,72 380,78 L380,155 L0,155Z" fill="url(#h1)" opacity="0.6"/>','<path d="M0,145 Q55,108 108,128 Q160,100 208,118 Q258,94 308,112 Q345,100 380,106 L380,185 L0,185Z" fill="url(#h2)"/>','<path d="M20,156 Q95,144 175,151 Q255,139 355,146" fill="none" stroke="#1a5028" stroke-width="1.5" opacity="0.5"/>','<path d="M8,169 Q88,158 168,164 Q248,151 368,159" fill="none" stroke="#1a5028" stroke-width="1.2" opacity="0.4"/>','<path d="M0,176 Q35,162 78,171 Q122,156 168,166 Q212,152 258,162 Q302,150 345,158 L380,156 L380,300 L0,300Z" fill="url(#h3)"/>','<path d="M205,300 Q188,272 198,248 Q210,228 196,208 Q182,190 194,172" fill="none" stroke="#3090c8" stroke-width="7" opacity="0.65"/>','<path d="M205,300 Q188,272 198,248 Q210,228 196,208 Q182,190 194,172" fill="none" stroke="#60b8e8" stroke-width="3" opacity="0.55"/>','<rect x="248" y="228" width="30" height="20" fill="#f0d070" opacity="0.95" rx="1"/>','<polygon points="244,228 282,228 263,216" fill="#d04030" opacity="0.95"/>','<ellipse cx="78" cy="62" rx="40" ry="16" fill="white" opacity="0.88"/>','<ellipse cx="55" cy="68" rx="26" ry="14" fill="white" opacity="0.82"/>','<ellipse cx="102" cy="65" rx="30" ry="14" fill="white" opacity="0.82"/>','<ellipse cx="80" cy="54" rx="24" ry="14" fill="white" opacity="0.92"/>','<ellipse cx="295" cy="50" rx="36" ry="15" fill="white" opacity="0.85"/>','<ellipse cx="272" cy="56" rx="24" ry="12" fill="white" opacity="0.78"/>','<ellipse cx="318" cy="54" rx="26" ry="12" fill="white" opacity="0.78"/>',rows,buds]);}
+function gtmArt(a){var pines='';var pX=[0,18,36,52,66,78,90,100,264,278,290,302,314,326,338,352,368,380];for(var i=0;i<pX.length;i++){var h=22+(i%3)*10;pines+='<polygon points="'+pX[i]+',250 '+(pX[i]-11)+','+(250-h)+' '+(pX[i]+11)+','+(250-h)+'" fill="#0a2010" opacity="0.92"/><polygon points="'+pX[i]+',238 '+(pX[i]-8)+','+(238-Math.round(h*0.65))+' '+(pX[i]+8)+','+(238-Math.round(h*0.65))+'" fill="#0e2a14" opacity="0.8"/>';}var mX=[8,28,50,72,298,322,348,372];var mglds='';for(var j=0;j<mX.length;j++){var x=mX[j];mglds+='<circle cx="'+x+'" cy="285" r="9" fill="#f87010" opacity="0.9"/><circle cx="'+(x+3)+'" cy="279" r="7" fill="#f8a820" opacity="0.85"/><circle cx="'+(x-4)+'" cy="280" r="6" fill="#f06018" opacity="0.8"/>';}return S(['<defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#180c38"/><stop offset="28%" stop-color="#8a2040"/><stop offset="55%" stop-color="#d85020"/><stop offset="78%" stop-color="#f09030"/><stop offset="100%" stop-color="#f8c850"/></linearGradient></defs>','<rect width="380" height="300" fill="url(#gg)"/>','<path d="M0,295 Q62,205 132,238 L192,46 L252,238 Q318,205 380,295 L380,300 L0,300Z" fill="#2a160a" opacity="0.95"/>','<path d="M150,238 L192,46 L225,175 Q205,200 182,238Z" fill="#3a1e0c" opacity="0.7"/>','<path d="M178,68 L192,46 L206,68 Q199,60 192,58 Q185,60 178,68Z" fill="white" opacity="0.88"/>','<ellipse cx="192" cy="52" rx="10" ry="4" fill="#ff5808" opacity="0.55"/>','<path d="M268,295 L330,118 L390,295Z" fill="#200e06" opacity="0.92"/>','<path d="M323,128 L330,118 L337,128Z" fill="white" opacity="0.7"/>','<ellipse cx="190" cy="38" rx="10" ry="4" fill="#d0c8c0" opacity="0.3"/>','<ellipse cx="186" cy="27" rx="14" ry="5" fill="#c8c0b8" opacity="0.22"/>',pines,'<rect x="145" y="242" width="30" height="24" fill="#f0d068" opacity="0.96" rx="1"/>','<rect x="178" y="247" width="22" height="19" fill="#e8c850" opacity="0.9" rx="1"/>','<rect x="203" y="244" width="26" height="22" fill="#f0d068" opacity="0.96" rx="1"/>','<polygon points="141,242 178,242 160,229" fill="#c03828" opacity="0.96"/>','<polygon points="175,247 203,247 189,235" fill="#c84030" opacity="0.9"/>','<polygon points="200,244 232,244 216,231" fill="#c03828" opacity="0.96"/>','<rect x="161" y="220" width="12" height="22" fill="#e8c250" opacity="0.95"/>','<polygon points="158,220 176,220 167,210" fill="#c03828" opacity="0.95"/>',mglds]);}
+function kenArt(a){var grass='';for(var i=0;i<26;i++){var x=i*15;var h=9+(i%4)*5;grass+='<path d="M'+x+',222 Q'+(x-3)+','+(222-h)+' '+x+','+(222-h*1.4)+' Q'+(x+3)+','+(222-h)+' '+x+',222" fill="#7a4a0e" opacity="0.85"/>';}return S(['<defs><linearGradient id="kg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0c1828"/><stop offset="22%" stop-color="#962810"/><stop offset="48%" stop-color="#e85010"/><stop offset="72%" stop-color="#f09828"/><stop offset="100%" stop-color="#f8c838"/></linearGradient><radialGradient id="ks" cx="68%" cy="55%" r="24%"><stop offset="0%" stop-color="#fff8a0"/><stop offset="28%" stop-color="#ffb818" stop-opacity="0.95"/><stop offset="70%" stop-color="#ff6000" stop-opacity="0.5"/><stop offset="100%" stop-color="#e04000" stop-opacity="0"/></radialGradient></defs>','<rect width="380" height="300" fill="url(#kg)"/>','<ellipse cx="258" cy="166" rx="92" ry="92" fill="url(#ks)"/>','<circle cx="258" cy="166" r="46" fill="#ffe860" opacity="0.9"/>','<circle cx="258" cy="166" r="36" fill="#fff898" opacity="0.85"/>','<path d="M0,148 Q35,118 72,132 Q105,105 135,120 Q158,98 178,115 Q198,102 218,118 Q245,108 278,122 Q308,112 345,126 L380,130 L380,162 L0,162Z" fill="#1e0e06" opacity="0.45"/>','<rect x="0" y="222" width="380" height="78" fill="#4a2808"/>','<path d="M0,222 Q95,210 190,216 Q285,207 380,212 L380,222 L0,222Z" fill="#5a3210"/>',grass,'<rect x="54" y="178" width="6" height="44" fill="#0d0804" rx="3"/>','<line x1="57" y1="200" x2="29" y2="188" stroke="#0d0804" stroke-width="3"/>','<line x1="57" y1="194" x2="85" y2="184" stroke="#0d0804" stroke-width="2.5"/>','<ellipse cx="57" cy="174" rx="40" ry="11" fill="#080604"/>','<ellipse cx="33" cy="180" rx="22" ry="8" fill="#0c0a06"/>','<ellipse cx="81" cy="178" rx="24" ry="8" fill="#0c0a06"/>','<rect x="296" y="186" width="5" height="36" fill="#0d0804" rx="2.5"/>','<ellipse cx="298" cy="182" rx="32" ry="9" fill="#080604"/>','<ellipse cx="276" cy="187" rx="18" ry="7" fill="#0c0a06"/>','<ellipse cx="320" cy="186" rx="20" ry="7" fill="#0c0a06"/>','<rect x="342" y="188" width="7" height="34" fill="#0d0804" rx="3"/>','<line x1="345" y1="204" x2="362" y2="168" stroke="#0d0804" stroke-width="4"/>','<ellipse cx="366" cy="164" rx="9" ry="6" fill="#0d0804"/>','<line x1="360" y1="166" x2="368" y2="154" stroke="#0d0804" stroke-width="2"/>','<line x1="338" y1="222" x2="334" y2="244" stroke="#0d0804" stroke-width="4"/>','<line x1="350" y1="222" x2="354" y2="244" stroke="#0d0804" stroke-width="4"/>','<ellipse cx="148" cy="214" rx="22" ry="14" fill="#0d0804" opacity="0.85"/>','<ellipse cx="133" cy="210" rx="12" ry="10" fill="#0d0804" opacity="0.85"/>','<path d="M130,212 Q121,222 119,228" fill="none" stroke="#0d0804" stroke-width="4"/>','<line x1="138" y1="222" x2="134" y2="238" stroke="#0d0804" stroke-width="4"/>','<line x1="148" y1="224" x2="152" y2="238" stroke="#0d0804" stroke-width="4"/>']);}
+function brzArt(a){var rows='',beries='';for(var i=0;i<10;i++){var y=252+i*4;rows+='<path d="M'+(i*3)+','+y+' Q95,'+(y-7)+' 190,'+(y-2)+' Q285,'+(y-8)+' 380,'+(y-3)+'" fill="none" stroke="#168028" stroke-width="2.5" opacity="'+(0.48+i*0.05)+'"/>';}for(var j=0;j<10;j++){beries+='<circle cx="'+(15+j*36)+'" cy="250" r="3.5" fill="#d82a18" opacity="0.9"/><circle cx="'+(30+j*36)+'" cy="254" r="3" fill="#c02010" opacity="0.85"/>';}return S(['<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1050b8"/><stop offset="55%" stop-color="#3898e8"/><stop offset="100%" stop-color="#78c8f8"/></linearGradient><linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#38c038"/><stop offset="100%" stop-color="#207828"/></linearGradient><linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#50d848"/><stop offset="100%" stop-color="#289830"/></linearGradient><linearGradient id="b3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#68e860"/><stop offset="100%" stop-color="#38b840"/></linearGradient></defs>','<rect width="380" height="300" fill="url(#bg)"/>','<circle cx="60" cy="52" r="28" fill="#ffe840" opacity="0.9"/>','<circle cx="60" cy="52" r="22" fill="#fff878" opacity="0.95"/>','<line x1="60" y1="16" x2="60" y2="8" stroke="#ffe840" stroke-width="3" opacity="0.6"/>','<line x1="84" y1="28" x2="90" y2="22" stroke="#ffe840" stroke-width="3" opacity="0.6"/>','<line x1="96" y1="52" x2="104" y2="52" stroke="#ffe840" stroke-width="3" opacity="0.6"/>','<line x1="36" y1="28" x2="30" y2="22" stroke="#ffe840" stroke-width="3" opacity="0.6"/>','<line x1="24" y1="52" x2="16" y2="52" stroke="#ffe840" stroke-width="3" opacity="0.6"/>','<ellipse cx="188" cy="58" rx="50" ry="20" fill="white" opacity="0.94"/>','<ellipse cx="160" cy="64" rx="32" ry="17" fill="white" opacity="0.88"/>','<ellipse cx="216" cy="62" rx="36" ry="17" fill="white" opacity="0.88"/>','<ellipse cx="190" cy="48" rx="30" ry="17" fill="white" opacity="0.95"/>','<ellipse cx="320" cy="42" rx="44" ry="18" fill="white" opacity="0.90"/>','<ellipse cx="296" cy="48" rx="28" ry="15" fill="white" opacity="0.84"/>','<ellipse cx="345" cy="46" rx="30" ry="15" fill="white" opacity="0.84"/>','<path d="M-10,178 Q55,128 115,152 Q178,118 238,142 Q295,112 355,136 L390,130 L390,300 L-10,300Z" fill="url(#b1)"/>','<path d="M-10,208 Q45,180 105,196 Q165,168 222,186 Q278,160 335,178 L390,170 L390,300 L-10,300Z" fill="url(#b2)"/>','<path d="M-10,238 Q50,218 115,228 Q178,210 238,222 Q292,206 355,218 L390,214 L390,300 L-10,300Z" fill="url(#b3)"/>',rows,beries,'<rect x="140" y="188" width="38" height="26" fill="#f8de6a" opacity="0.96" rx="1"/>','<polygon points="135,188 183,188 158,173" fill="#d84030" opacity="0.96"/>','<rect x="154" y="198" width="11" height="16" fill="#9a6028" opacity="0.9" rx="1"/>','<ellipse cx="330" cy="128" rx="11" ry="5" fill="#28c888"/>','<ellipse cx="318" cy="126" rx="7" ry="5" fill="#20a870"/>','<path d="M341,128 L356,125" stroke="#188058" stroke-width="2"/>']);}
+function criArt(a){var cl='';var cxs=[0,30,62,92,120,148,175,205,232,262,290,318,348,378];var cys=[168,155,162,150,158,144,152,146,155,148,160,152,164,158];var crs=[32,28,30,26,28,24,26,24,28,25,30,26,30,28];for(var i=0;i<cxs.length;i++){var sh=i%3===0?'#145a18':i%3===1?'#1a7020':'#107818';cl+='<ellipse cx="'+cxs[i]+'" cy="'+cys[i]+'" rx="'+crs[i]+'" ry="'+Math.round(crs[i]*0.75)+'" fill="'+sh+'" opacity="0.9"/>';}var mg='';for(var j=0;j<12;j++){var x=j*34;var y=192+(j%3)*6;mg+='<ellipse cx="'+x+'" cy="'+y+'" rx="26" ry="18" fill="#1d8820" opacity="0.82"/>';}return S(['<defs><linearGradient id="crg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#082a10"/><stop offset="35%" stop-color="#0e4818"/><stop offset="70%" stop-color="#147820"/><stop offset="100%" stop-color="#1a9828"/></linearGradient></defs>','<rect width="380" height="300" fill="url(#crg)"/>','<path d="M-10,200 Q30,160 70,178 Q110,148 150,165 Q190,138 230,155 Q265,135 300,150 Q330,138 390,145 L390,300 L-10,300Z" fill="#0d3a18" opacity="0.8"/>',cl,'<path d="M188,52 Q194,90 191,130 Q188,168 192,208 Q195,240 190,278" fill="none" stroke="#a0d8f0" stroke-width="16" stroke-linecap="round" opacity="0.6"/>','<path d="M188,52 Q195,90 192,130 Q189,168 193,208" fill="none" stroke="white" stroke-width="5" opacity="0.28"/>','<ellipse cx="192" cy="275" rx="35" ry="12" fill="white" opacity="0.18"/>','<ellipse cx="192" cy="282" rx="30" ry="8" fill="#40a8d0" opacity="0.5"/>',mg,'<circle cx="80" cy="200" r="8" fill="#e83060" opacity="0.9"/>','<circle cx="290" cy="190" r="9" fill="#f0a020" opacity="0.9"/>','<circle cx="345" cy="205" r="7" fill="#e03060" opacity="0.9"/>','<path d="M65,245 Q75,225 88,235 Q82,218 95,228" fill="#e82838" stroke="#c01828" stroke-width="1"/>','<path d="M68,252 Q78,234 90,244 Q85,226 97,238" fill="#f8a018" stroke="#d08010" stroke-width="1"/>','<ellipse cx="315" cy="152" rx="12" ry="9" fill="#101010"/>','<ellipse cx="304" cy="150" rx="8" ry="7" fill="#181818"/>','<path d="M310,149 Q325,144 332,149 Q328,156 310,154Z" fill="#f0a018"/>','<circle cx="305" cy="149" r="2" fill="white"/>','<path d="M245,130 Q236,120 240,130 Q236,140 245,130Z" fill="#2050e8" opacity="0.85"/>','<path d="M245,130 Q254,120 250,130 Q254,140 245,130Z" fill="#3870f8" opacity="0.85"/>']);}
+function yemArt(a){var stars='';var sd=[[48,24,1.5,0.85],[102,14,1.2,0.72],[165,20,1.8,0.9],[228,10,1.0,0.65],[295,18,1.4,0.78],[352,28,1.3,0.7],[78,38,1.0,0.6],[188,32,0.9,0.58],[320,8,1.5,0.8],[138,6,1.1,0.7],[240,34,1.2,0.68]];for(var i=0;i<sd.length;i++)stars+='<circle cx="'+sd[i][0]+'" cy="'+sd[i][1]+'" r="'+sd[i][2]+'" fill="white" opacity="'+sd[i][3]+'"/>';var blds=[{x:48,w:24,h:115},{x:80,w:20,h:132},{x:108,w:22,h:100},{x:178,w:24,h:124},{x:207,w:20,h:108},{x:233,w:24,h:120},{x:298,w:22,h:105},{x:328,w:20,h:122}];var bsvg='';for(var i=0;i<blds.length;i++){var b=blds[i];var x=b.x;var h=b.h;var w=b.w;var base=245;bsvg+='<rect x="'+(x-w/2)+'" y="'+(base-h)+'" width="'+w+'" height="'+h+'" fill="#c48a30" opacity="0.92" rx="1"/>';bsvg+='<rect x="'+(x+w/2-4)+'" y="'+(base-h)+'" width="4" height="'+h+'" fill="#8a5010" opacity="0.4"/>';bsvg+='<rect x="'+(x-w/2-3)+'" y="'+(base-h-12)+'" width="'+(w+6)+'" height="12" fill="#d89a38" opacity="0.95" rx="1"/>';bsvg+='<rect x="'+(x-w/2+3)+'" y="'+(base-h-18)+'" width="'+(w-6)+'" height="7" fill="#e0a840" opacity="0.9" rx="1"/>';for(var row=0;row<3;row++){for(var col=0;col<2;col++){var wx=x-w/2+4+col*(w/2-1);var wy=base-h+16+row*28;var ww=Math.round(w/2-6);bsvg+='<rect x="'+wx+'" y="'+wy+'" width="'+ww+'" height="12" fill="#f8d840" opacity="0.75" rx="2"/>';}}bsvg+='<rect x="'+(x-5)+'" y="'+(base-22)+'" width="10" height="22" fill="#8a5010" opacity="0.6" rx="4"/>';}return S(['<defs><linearGradient id="yg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#080618"/><stop offset="35%" stop-color="#180e38"/><stop offset="62%" stop-color="#502010"/><stop offset="85%" stop-color="#904018"/><stop offset="100%" stop-color="#c87020"/></linearGradient></defs>','<rect width="380" height="300" fill="url(#yg)"/>',stars,'<circle cx="305" cy="58" r="30" fill="#f8d858" opacity="0.94"/>','<circle cx="317" cy="52" r="24" fill="#180e38"/>','<polygon points="342,40 344.5,32 347,40 355,42.5 347,45 344.5,53 342,45 334,42.5" fill="#f8d858" opacity="0.9"/>','<path d="M-10,205 Q25,162 58,180 Q85,145 115,166 Q140,128 165,152 Q185,120 205,145 Q225,130 248,150 Q272,122 298,144 Q320,128 348,146 Q365,135 390,148 L390,300 L-10,300Z" fill="#1e0e06" opacity="0.9"/>','<path d="M-10,228 Q32,210 72,220 Q115,205 158,216 Q192,200 228,212 Q260,198 300,210 Q332,200 390,208 L390,300 L-10,300Z" fill="#160c04"/>',bsvg,'<line x1="138" y1="245" x2="138" y2="212" stroke="#2a1808" stroke-width="4"/>','<path d="M120,216 Q138,198 156,216 Q146,204 138,201 Q130,204 120,216Z" fill="#2e2410" opacity="0.85"/>','<line x1="262" y1="245" x2="262" y2="215" stroke="#2a1808" stroke-width="3.5"/>','<path d="M246,218 Q262,202 278,218 Q269,207 262,205 Q255,207 246,218Z" fill="#2e2410" opacity="0.85"/>','<path d="M-10,272 Q60,258 130,265 Q200,255 270,262 Q330,253 390,260 L390,300 L-10,300Z" fill="#7a4818" opacity="0.8"/>','<path d="M-10,285 Q55,277 120,281 Q190,273 255,279 Q315,272 390,276 L390,300 L-10,300Z" fill="#8a5420" opacity="0.9"/>']);}
+function defArt(a){return S(['<rect width="380" height="300" fill="#1a1008"/>','<circle cx="190" cy="130" r="58" fill="none" stroke="'+a+'" stroke-width="1.5" opacity="0.5"/>','<circle cx="190" cy="130" r="80" fill="none" stroke="'+a+'" stroke-width="0.8" opacity="0.28"/>','<text x="190" y="135" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="'+a+'" fill-opacity="0.65" letter-spacing="2.5">SINGLE ORIGIN</text>']);}
+
+// INIT
+renderInv();
+renderOrders();
+buildThemes();
+popRoastSel();
+popCollSel();
+</script>
+
+
+</body></html>
